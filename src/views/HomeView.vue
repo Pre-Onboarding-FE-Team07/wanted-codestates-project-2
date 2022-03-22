@@ -1,6 +1,28 @@
 <template>
-  <div class="relative flex flex-col overflow-hidden bg-center bg-cover bg-main-bg place-items-center place-content-center h-[655px]">
+  <div class="relative flex flex-col overflow-hidden bg-center bg-cover bg-main-bg place-items-center place-content-center h-[655px] min-w-[1400px]">
     <div class="absolute inset-0 bg-[#005fcc] opacity-30" />
+    <div class="absolute inset-0 max-w-[1600px] mx-auto">
+      <img
+        class="absolute left-0 w-[380px] top-[200px]"
+        src="../assets/covid_left.png"
+        alt=""
+      >
+      <img
+        class="absolute right-0 w-[380px] top-[200px]"
+        src="../assets/covid_right.png"
+        alt=""
+      >
+      <img
+        class="absolute left-0 h-[300px] top-[200px]"
+        src="../assets/main_left_bg.png"
+        alt=""
+      >
+      <img
+        class="absolute right-0 h-[300px] top-[200px]"
+        src="../assets/main_right_bg.png"
+        alt=""
+      >
+    </div>
     <div class="relative flex flex-col items-center w-full gap-16 px-10 text-white">
       <header class="text-center">
         <span class="text-[28px] leading-4">넥슨 오픈 API 기반</span>
