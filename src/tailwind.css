@@ -16,3 +16,18 @@
     @apply outline-none;
   }
 }
+
+@layer components {
+  .ltr-underline {
+    @apply relative;
+
+    &::after {
+      @apply content-[''] absolute bg-black bottom-0 h-[4px] left-0 w-full scale-x-0 origin-bottom-right transition-transform;
+    }
+
+    &:hover::after {
+      @apply origin-bottom-left scale-x-100
+    }
+  }
+
+}
