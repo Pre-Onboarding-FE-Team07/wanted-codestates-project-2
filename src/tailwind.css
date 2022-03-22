@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply overflow-y-scroll;
+  }
+
   body {
     font-family: Noto Sans KR;
   }

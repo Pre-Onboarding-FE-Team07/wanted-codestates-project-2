@@ -19,9 +19,10 @@
 </template>
 
 <script lang="ts">
-import NewsCard from '@/components/NewsCard.vue';
+import NewsCard from '@/components/home/NewsCard.vue';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   components: { NewsCard },
-};
+});
 </script>

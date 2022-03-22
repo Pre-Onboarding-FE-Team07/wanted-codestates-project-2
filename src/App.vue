@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts">
-import HeaderArea from '@/components/HeaderArea.vue';
+import HeaderArea from '@/components/shared/HeaderArea.vue';
 
 export default {
   components: { HeaderArea },

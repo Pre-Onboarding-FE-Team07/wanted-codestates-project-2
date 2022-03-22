@@ -9,13 +9,14 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   props: {
     title: {
       type: String,
       default: 'Fill title here',
     },
   },
-};
+});
 </script>

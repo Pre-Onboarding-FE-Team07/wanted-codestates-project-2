@@ -1,12 +1,12 @@
 <template>
   <header class="flex items-center justify-between gap-3 m-3 px-6 max-w-[1400px] w-full">
     <img
-      src="../assets/logo_kart.png"
+      src="@/assets/logo_kart.png"
       alt=""
     >
     <router-link to="/">
       <img
-        src="../assets/tmi_logo_default_b.svg"
+        src="@/assets/tmi_logo_default_b.svg"
         alt=""
       >
     </router-link>
@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import TabNavigation from '@/components/TabNavigation.vue';
+import TabNavigation from '@/components/shared/TabNavigation.vue';
 
 export default defineComponent({
   components: { TabNavigation },

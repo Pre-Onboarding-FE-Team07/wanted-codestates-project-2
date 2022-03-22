@@ -4,22 +4,22 @@
     <div class="absolute inset-0 top-12 max-w-[1600px] mx-auto xl:block">
       <img
         class="absolute left-[30px] w-[200px] top-[20px] xl:w-[380px] xl:top-[150px]"
-        src="../assets/covid_left.png"
+        src="@/assets/covid_left.png"
         alt=""
       >
       <img
         class="absolute left-[30px] h-[160px] top-[20px] xl:h-[300px] xl:top-[150px]"
-        src="../assets/main_left_bg.png"
+        src="@/assets/main_left_bg.png"
         alt=""
       >
       <img
         class="absolute right-[30px] w-[200px] top-[440px] xl:w-[380px] xl:top-[150px]"
-        src="../assets/covid_right.png"
+        src="@/assets/covid_right.png"
         alt=""
       >
       <img
         class="absolute right-[30px] h-[160px] top-[440px] xl:h-[300px] xl:top-[150px]"
-        src="../assets/main_right_bg.png"
+        src="@/assets/main_right_bg.png"
         alt=""
       >
     </div>
@@ -48,7 +48,7 @@
         </label>
         <button type="submit">
           <img
-            src="../assets/tmi_logo_default.svg"
+            src="@/assets/tmi_logo_default.svg"
             alt=""
           >
         </button>
