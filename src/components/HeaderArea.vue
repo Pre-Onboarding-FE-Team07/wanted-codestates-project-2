@@ -1,5 +1,5 @@
 <template>
-  <header class="flex items-center justify-between gap-3 m-3 mx-auto px-6 max-w-[1400px]">
+  <header class="flex items-center justify-between gap-3 m-3 px-6 max-w-[1400px] w-full">
     <img
       src="../assets/logo_kart.png"
       alt=""

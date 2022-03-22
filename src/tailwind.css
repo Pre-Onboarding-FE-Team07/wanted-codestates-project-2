@@ -7,8 +7,12 @@
     font-family: Noto Sans KR;
   }
 
+  #app {
+    @apply flex flex-col items-center;
+  }
+
   input,
   button {
-    outline: none;
+    @apply outline-none;
   }
 }
