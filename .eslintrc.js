@@ -20,5 +20,7 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'tailwindcss/classnames-order': 'off',
+    'max-len': 'off',
   },
 };
