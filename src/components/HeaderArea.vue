@@ -17,4 +17,23 @@
       rel="noopener"
     >카트라이더 홈페이지 바로가기</a>
   </header>
+  <tab-navigation :tabs="tabs" />
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import TabNavigation from '@/components/TabNavigation.vue';
+
+export default defineComponent({
+  components: { TabNavigation },
+  data() {
+    return {
+      tabs: [
+        { to: '/', name: '홈' },
+        { to: '/rank', name: '랭킹' },
+        { to: '/track', name: '트랙' },
+      ],
+    };
+  },
+});
+</script>

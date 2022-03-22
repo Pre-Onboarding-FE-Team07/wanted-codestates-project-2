@@ -1,24 +1,24 @@
 <template>
-  <div class="relative flex flex-col overflow-hidden bg-center bg-cover bg-main place-items-center place-content-center h-[655px] w-full xl:w-full min-w-[500px]">
+  <div class="relative flex flex-col overflow-hidden bg-center bg-cover bg-main place-items-center place-content-center h-[655px] w-full xl:w-full min-w-[640px] -mt-16">
     <div class="absolute inset-0 bg-[#005fcc] opacity-30" />
-    <div class="absolute inset-0 max-w-[1600px] mx-auto xl:block">
+    <div class="absolute inset-0 top-12 max-w-[1600px] mx-auto xl:block">
       <img
-        class="absolute left-[30px] w-[200px] top-[20px] xl:w-[380px] xl:top-[200px]"
+        class="absolute left-[30px] w-[200px] top-[20px] xl:w-[380px] xl:top-[150px]"
         src="../assets/covid_left.png"
         alt=""
       >
       <img
-        class="absolute left-[30px] h-[160px] top-[20px] xl:h-[300px] xl:top-[200px]"
+        class="absolute left-[30px] h-[160px] top-[20px] xl:h-[300px] xl:top-[150px]"
         src="../assets/main_left_bg.png"
         alt=""
       >
       <img
-        class="absolute right-[30px] w-[200px] top-[480px] xl:w-[380px] xl:top-[200px]"
+        class="absolute right-[30px] w-[200px] top-[440px] xl:w-[380px] xl:top-[150px]"
         src="../assets/covid_right.png"
         alt=""
       >
       <img
-        class="absolute right-[30px] h-[160px] top-[480px] xl:h-[300px] xl:top-[200px]"
+        class="absolute right-[30px] h-[160px] top-[440px] xl:h-[300px] xl:top-[150px]"
         src="../assets/main_right_bg.png"
         alt=""
       >
