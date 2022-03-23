@@ -34,12 +34,14 @@
           </ul>
         </div>
       </div>
+      <kart-table />
     </template>
   </board-container>
 </template>
 
 <script lang="ts" setup>
 import BoardContainer from '@/components/user/BoardContainer.vue';
+import KartTable from '@/components/user/KartTable.vue';
 
 export type Record = {
   icon: string;
