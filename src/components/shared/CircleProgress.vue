@@ -76,7 +76,6 @@ const props = defineProps({
 
 const circumference = 2 * Math.PI * (props.radius - props.stroke);
 const progress = circumference * (1 - (props.value / 100));
-console.log(progress);
 </script>
 
 <style scoped>

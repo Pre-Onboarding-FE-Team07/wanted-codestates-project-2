@@ -20,20 +20,12 @@
   <tab-navigation :tabs="tabs" />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import TabNavigation from '@/components/shared/TabNavigation.vue';
 
-export default defineComponent({
-  components: { TabNavigation },
-  data() {
-    return {
-      tabs: [
-        { to: '/', name: '홈' },
-        { to: '/rank', name: '랭킹' },
-        { to: '/track', name: '트랙' },
-      ],
-    };
-  },
-});
+const tabs = [
+  { to: '/', name: '홈' },
+  { to: '/rank', name: '랭킹' },
+  { to: '/track', name: '트랙' },
+];
 </script>

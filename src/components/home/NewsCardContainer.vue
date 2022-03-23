@@ -18,11 +18,6 @@
   </section>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import NewsCard from '@/components/home/NewsCard.vue';
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  components: { NewsCard },
-});
 </script>

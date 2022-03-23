@@ -1,5 +1,8 @@
 <template>
-  <nav class="z-10 w-auto xl:w-full max-w-[1300px]">
+  <nav
+    class="z-10 w-auto xl:w-full max-w-[1300px]"
+    :class="`bg-${bgColor}`"
+  >
     <ul class="flex mx-3 text-sm text-white">
       <li
         v-for="(tab, index) in tabs"
@@ -17,20 +20,24 @@
   </nav>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export type Tab = {
+<script lang="ts" setup>
+type Tab = {
   to: string;
   name: string;
 };
 
-export default defineComponent({
-  props: {
-    tabs: {
-      type: Array as () => Tab[],
-      required: true,
-    },
+defineProps({
+  tabs: {
+    type: Array as () => Tab[],
+    required: true,
+  },
+  bgColor: {
+    type: String as () => 'transparent' | 'main',
+    default: 'main',
+  },
+  showSearch: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>
