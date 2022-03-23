@@ -1,5 +1,34 @@
 <template>
-  <div class="h-[300px] overflow-auto mb-2">
+  <table-wrapper :headers="headers">
+    <tr
+      v-for="(track, index) in tracks"
+      :key="index"
+      class="text-center"
+    >
+      <td class="p-1">
+        <label for="track">
+          <input
+            id="track"
+            type="radio"
+            name="select-track"
+            :checked="selectedIndex === index"
+          >
+        </label>
+      </td>
+      <td class="text-left">
+        {{ track.name }}
+      </td>
+      <td>{{ track.count }}</td>
+      <td>{{ track.win }}</td>
+      <td>
+        {{ track.lapTime }}
+      </td>
+      <td>
+        {{ track.top }}
+      </td>
+    </tr>
+  </table-wrapper>
+  <!-- <div class="h-[300px] overflow-auto mb-2">
     <table class="w-full border">
       <thead class="top-0 text-sm bg-gray-100">
         <tr>
@@ -12,45 +41,20 @@
           </th>
         </tr>
       </thead>
-      <tbody class="overflow-scroll text-sm text-gray-700">
-        <tr
-          v-for="(track, index) in tracks"
-          :key="index"
-          class="text-center"
-        >
-          <td class="p-1">
-            <label for="track">
-              <input
-                id="track"
-                type="radio"
-                name="select-track"
-                :checked="selectedIndex === index"
-              >
-            </label>
-          </td>
-          <td class="text-left">
-            {{ track.name }}
-          </td>
-          <td>{{ track.count }}</td>
-          <td>{{ track.win }}</td>
-          <td>
-            {{ track.lapTime }}
-          </td>
-          <td>
-            {{ track.top }}
-          </td>
-        </tr>
+      <tbody class="text-sm text-gray-700">
+
       </tbody>
     </table>
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts" setup>
+import TableWrapper from '@/components/shared/TableWrapper.vue';
 import { ref } from 'vue';
 
 const selectedIndex = ref(0);
 
-const headers = ['선택', '트랙', '횟수', '승률', '기록', '상위'] as const;
+const headers = ['선택', '트랙', '횟수', '승률', '기록', '상위'];
 
 const tracks = [
   {
