@@ -9,7 +9,7 @@
       <span>65패</span>
     </template>
     <template #content>
-      <div class="flex">
+      <div class="flex justify-between">
         <circle-progress
           v-for="(progress, index) in progressList"
           :key="index"
@@ -18,7 +18,7 @@
           :color="progress.color"
           :stroke="7"
           :radius="45"
-          class="px-2 border-r border-gray-200 last:border-r-0"
+          class="px-2"
         />
       </div>
       <div class="flex items-center justify-between gap-1 p-2 mt-5 border-t">
