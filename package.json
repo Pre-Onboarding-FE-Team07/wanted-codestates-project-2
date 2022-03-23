@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "chart.js": "^3.7.1",
+    "polished": "^4.1.4",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
