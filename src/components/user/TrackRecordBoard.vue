@@ -16,12 +16,14 @@
           ref="canvasRef"
         />
       </div>
+      <record-table />
     </template>
   </board-container>
 </template>
 
 <script lang="ts" setup>
 import BoardContainer from '@/components/user/BoardContainer.vue';
+import RecordTable from '@/components/user/RecordTable.vue';
 import { colors } from '@/styles/theme';
 import { Chart, ChartData, ChartOptions } from 'chart.js';
 import { onMounted, ref } from 'vue';
@@ -59,5 +61,4 @@ onMounted(() => {
     options,
   });
 });
-
 </script>
