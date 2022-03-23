@@ -24,5 +24,6 @@ module.exports = {
     'vue/script-setup-uses-vars': 'error',
     'tailwindcss/classnames-order': 'off',
     'max-len': 'off',
+    '@typescript-eslint/no-unused-vars': ['warn', { varsIgnorePattern: '^_' }],
   },
 };
