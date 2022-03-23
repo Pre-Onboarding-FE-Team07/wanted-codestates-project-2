@@ -1,5 +1,5 @@
 <template>
-  <nav class="z-10 w-auto xl:w-full max-w-[1400px]">
+  <nav class="z-10 w-auto xl:w-full max-w-[1300px]">
     <ul class="flex mx-3 text-sm text-white">
       <li
         v-for="(tab, index) in tabs"
