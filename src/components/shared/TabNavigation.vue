@@ -1,16 +1,17 @@
 <template>
   <nav
-    class="z-10 w-auto xl:w-full max-w-[1300px]"
-    :class="`bg-${bgColor}`"
+    :class="`z-10 w-full max-w-[1300px] bg-${bgColor} text-[${fontSize}px]`"
   >
-    <ul class="flex mx-3 text-sm text-white">
+    <ul
+      :class="`flex gap-${gap} text-gray-400`"
+    >
       <li
         v-for="(tab, index) in tabs"
         :key="index"
-        class="mr-8"
+        :class="`hover:text-${textColor}`"
       >
         <router-link
-          class="inline-block p-5 px-8 ltr-underline after:bg-white"
+          :class="`inline-block p-5 px-8 ltr-underline after:bg-${textColor}`"
           :to="tab.to"
         >
           {{ tab.name }}
@@ -21,23 +22,25 @@
 </template>
 
 <script lang="ts" setup>
-type Tab = {
+export type Tab = {
   to: string;
   name: string;
 };
 
-defineProps({
-  tabs: {
-    type: Array as () => Tab[],
-    required: true,
-  },
-  bgColor: {
-    type: String as () => 'transparent' | 'main',
-    default: 'main',
-  },
-  showSearch: {
-    type: Boolean,
-    default: false,
-  },
+export type Tabs = Tab[];
+
+withDefaults(defineProps<{
+  tabs: Tabs,
+  bgColor?: 'transparent' | 'main',
+  textColor?: 'white' | 'main',
+  fontSize?: number,
+  showSearch?: boolean
+  gap?: number,
+}>(), {
+  bgColor: 'transparent',
+  textColor: 'main',
+  fontSize: 14,
+  showSearch: false,
+  gap: 8,
 });
 </script>

@@ -10,7 +10,7 @@
       <span>2개</span>
     </template>
     <template #content>
-      <div class="flex flex-col max-h-[200px]">
+      <div class="flex flex-col h-[190px]">
         <div
           ref="messageBox"
           class="flex flex-col-reverse my-2 overflow-y-auto grow"
@@ -51,7 +51,7 @@
           >
           <button
             type="submit"
-            class="px-2 py-1 bg-white border rounded-lg hover:bg-main hover:text-white border-main text-main"
+            class="px-2 py-1 bg-white border rounded-lg hover:bg-main hover:text-white border-main text-main whitespace-nowrap"
           >
             남기기
           </button>
