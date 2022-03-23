@@ -6,47 +6,45 @@
     >
       {{ title }}
     </h3>
-    <div class="relative">
-      <svg
-        :width="radius * 2"
-        :height="radius * 2"
-        overflow="visible"
-      >
-        <circle
-          :cx="radius"
-          :cy="radius"
-          fill="transparent"
-        />
-        <circle
-          :cx="radius"
-          :cy="radius"
-          :r="radius - stroke"
-          fill="transparent"
-          stroke="#ddd"
-          :stroke-width="stroke"
-        />
-        <circle
-          id="circle-progress"
-          :cx="radius"
-          :cy="radius"
-          :r="radius - stroke"
-          fill="transparent"
-          :stroke="color"
-          :stroke-width="stroke"
-          class="origin-center -rotate-90"
-          :stroke-dasharray="circumference"
-          :stroke-dashoffset="progress"
-        />
-        <text
-          :x="radius"
-          :y="radius"
-          text-anchor="middle"
-          dominant-baseline="middle"
-          :fill="color"
-          :font-size="radius / 2.2"
-        >{{ value }}%</text>
-      </svg>
-    </div>
+    <svg
+      :width="radius * 2"
+      :height="radius * 2"
+      overflow="visible"
+    >
+      <circle
+        :cx="radius"
+        :cy="radius"
+        fill="transparent"
+      />
+      <circle
+        :cx="radius"
+        :cy="radius"
+        :r="radius - stroke"
+        fill="transparent"
+        stroke="#ddd"
+        :stroke-width="stroke"
+      />
+      <circle
+        id="circle-progress"
+        :cx="radius"
+        :cy="radius"
+        :r="radius - stroke"
+        fill="transparent"
+        :stroke="color"
+        :stroke-width="stroke"
+        class="origin-center -rotate-90"
+        :stroke-dasharray="circumference"
+        :stroke-dashoffset="progress"
+      />
+      <text
+        :x="radius"
+        :y="radius"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        :fill="color"
+        :font-size="radius / 2.2"
+      >{{ value }}%</text>
+    </svg>
   </div>
 </template>
 
