@@ -20,6 +20,7 @@
 
 <script lang="ts" setup>
 import BoardContainer from '@/components/user/BoardContainer.vue';
+import { colors } from '@/styles/theme';
 import {
   Chart, ChartData, ChartOptions, registerables,
 } from 'chart.js';
@@ -30,18 +31,28 @@ Chart.register(...registerables);
 const canvasRef = ref();
 
 const data: ChartData<'line'> = {
-  datasets: [{
-    label: 'My First Dataset',
-    data: [65, 59, 80, 81, 56, 55, 40],
-    fill: false,
-    borderColor: 'rgb(75, 192, 192)',
-    tension: 0.1,
-  }],
+  labels: [...Array(20)].map((_, i) => `Label ${i + 1}`),
+  datasets: [
+    {
+      fill: false,
+      borderColor: colors.main,
+      borderWidth: 1,
+      pointBackgroundColor: colors.main,
+      pointRadius: 2,
+      data: [...Array(20)].map(() => Math.random() * 10),
+    },
+  ],
 };
 
-const options: ChartOptions = {
+const options: ChartOptions<'line'> = {
   plugins: {
     legend: {
+      display: false,
+    },
+  },
+  scales: {
+    x: {
+      position: 'top',
       display: false,
     },
   },
@@ -49,7 +60,7 @@ const options: ChartOptions = {
 
 onMounted(() => {
   const ctx = canvasRef.value.getContext('2d');
-  const lineChart = new Chart(ctx, {
+  const _ = new Chart(ctx, {
     type: 'line',
     data,
     options,
