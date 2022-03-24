@@ -1,8 +1,8 @@
 <template>
-  <div class="text-center">
+  <div :class="`text-center w-[${radius * 2}px]`">
     <h3
       v-if="title"
-      class="mb-3 text-sm"
+      class="mt-2 mb-3 text-sm"
     >
       {{ title }}
     </h3>
