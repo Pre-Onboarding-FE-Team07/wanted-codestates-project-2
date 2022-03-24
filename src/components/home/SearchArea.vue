@@ -1,7 +1,7 @@
 <template>
-  <div class="relative flex flex-col overflow-hidden bg-center bg-cover bg-main place-items-center place-content-center h-[655px] w-full xl:w-full min-w-[640px] -mt-16">
+  <div class="relative flex flex-col overflow-hidden bg-center bg-cover bg-flag-main place-items-center place-content-center h-[500px] sm:h-[655px] w-full xl:w-full -mt-16">
     <div class="absolute inset-0 bg-[#005fcc] opacity-30" />
-    <div class="absolute inset-0 top-12 max-w-[1400px] mx-auto xl:block">
+    <div class="absolute inset-0 top-12 max-w-[1400px] mx-auto xl:block hidden sm:block">
       <img
         class="absolute left-[30px] w-[200px] top-[20px] xl:w-[380px] xl:top-[150px]"
         src="@/assets/covid_left.png"
@@ -41,7 +41,7 @@
         >
           <input
             id="main-search-bar"
-            class="py-3 bg-transparent placeholder:text-gray-200 placeholder:opacity-80 text-[20px] w-full"
+            class="py-3 bg-transparent placeholder:text-gray-200 placeholder:opacity-80  text-sm sm:text-[20px] w-full"
             type="text"
             placeholder="카트라이더 닉네임을 입력하세요!"
           >

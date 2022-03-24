@@ -38,7 +38,7 @@
           :key="index"
           class="flex flex-col gap-3"
         >
-          <div class="w-[200px] h-[100px] overflow-hidden">
+          <div class="max-w-[200px] h-[100px] overflow-hidden">
             <img
               class="object-cover w-full h-full cursor-pointer zoom-in"
               :src="video.thumbnail"
