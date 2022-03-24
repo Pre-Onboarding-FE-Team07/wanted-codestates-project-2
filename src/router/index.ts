@@ -12,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "rank" */ '@/views/RankView.vue'),
   },
   {
-    path: '/user/:id',
+    path: '/user/:nickname',
     name: 'user',
     component: () => import(/* webpackChunkName: "rank" */ '@/views/UserView.vue'),
   },
@@ -20,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/track',
     name: 'track',
     component: () => import(/* webpackChunkName: "rank" */ '@/views/TrackView.vue'),
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import(/* webpackChunkName: "rank" */ '@/views/NotFoundView.vue'),
   },
 ];
 
