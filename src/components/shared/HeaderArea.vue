@@ -17,15 +17,4 @@
       rel="noopener"
     >카트라이더 홈페이지 바로가기</a>
   </header>
-  <tab-navigation :tabs="tabs" />
 </template>
-
-<script lang="ts" setup>
-import TabNavigation from '@/components/shared/TabNavigation.vue';
-
-const tabs = [
-  { to: '/', name: '홈' },
-  { to: '/rank', name: '랭킹' },
-  { to: '/track', name: '트랙' },
-];
-</script>

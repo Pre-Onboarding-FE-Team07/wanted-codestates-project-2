@@ -7,10 +7,10 @@
       :key="index"
       class="flex flex-col"
     >
-      <div class="flex items-center justify-between py-3 border-l-4 border-main bg-sky-50">
+      <div class="flex items-center justify-between py-3 overflow-x-auto text-sm border-l-4 border-main bg-sky-50 xl:text-base">
         <span class="mx-3">{{ record.time }}</span>
-        <span class="before:content-['#'] text-main italic text-4xl">{{ record.rank }}</span>
-        <span class="before:content-['/'] text-main italic text-xl self-end">{{ record.participants }}</span>
+        <span class="before:content-['#'] text-main italic text-2xl xl:text-4xl">{{ record.rank }}</span>
+        <span class="before:content-['/'] text-main italic text-base xl:text-xl self-end">{{ record.participants }}</span>
         <span class="mx-12 grow">{{ record.track }}</span>
         <span class="mx-4">{{ record.kart }}</span>
         <span class="mx-3">{{ record.lap }}</span>
