@@ -1,5 +1,7 @@
 <template>
-  <section class="flex flex-col items-center justify-center w-full bg-darken h-[600px] text-white px-4">
+  <section class="relative flex flex-col items-center justify-center w-full bg-darken h-[600px] text-white px-4 overflow-hidden">
+    <div class="absolute top-[450px] h-[198px] w-[6400px] bg-wave bg-repeat-x animate-wave" />
+    <div class="opacity-80 absolute top-[450px] -left-20 h-[198px] w-[6400px] bg-wave bg-repeat-x animate-second-wave" />
     <div class="max-w-[1000px] w-full">
       <h1 class="text-xl">
         3월 TMI 랭킹
