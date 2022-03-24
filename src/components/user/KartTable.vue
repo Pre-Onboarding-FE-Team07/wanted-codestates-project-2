@@ -11,6 +11,8 @@
             id="select-kart"
             type="radio"
             name="select-kart"
+            :checked="selectedIndex === index"
+            @change="selectedIndex = index"
           >
         </label>
       </td>
@@ -26,6 +28,9 @@
 
 <script lang="ts" setup>
 import TableWrapper from '@/components/shared/TableWrapper.vue';
+import { ref } from 'vue';
+
+const selectedIndex = ref(0);
 
 const headers = ['선택', '카트', '횟수', '승률', '리타이어율'];
 

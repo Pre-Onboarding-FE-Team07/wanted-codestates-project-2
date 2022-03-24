@@ -12,6 +12,7 @@
             type="radio"
             name="select-track"
             :checked="selectedIndex === index"
+            @change="selectedIndex = index"
           >
         </label>
       </td>
