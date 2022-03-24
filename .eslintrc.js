@@ -25,5 +25,6 @@ module.exports = {
     'tailwindcss/classnames-order': 'off',
     'max-len': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { varsIgnorePattern: '^_' }],
+    'import/prefer-default-export': 'off',
   },
 };
