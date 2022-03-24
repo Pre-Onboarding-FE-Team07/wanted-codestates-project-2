@@ -9,7 +9,7 @@
     <div class="grow">
       <div>
         <h1 class="mb-6 text-5xl font-black text-center md:text-left">
-          법사케피
+          {{ nickname }}
         </h1>
       </div>
       <div class="flex items-center">
@@ -36,12 +36,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import SelectButton from '@/components/shared/SelectButton.vue';
 import RoundButton from '@/components/user/RoundButton.vue';
 
-export default defineComponent({
-  components: { SelectButton, RoundButton },
-});
+withDefaults(defineProps<{
+  nickname: string;
+}>(), {});
 </script>
