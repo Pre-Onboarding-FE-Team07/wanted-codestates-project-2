@@ -9,7 +9,7 @@ module.exports = {
         main: '#07f',
       },
       backgroundImage: {
-        main: 'url("@/assets/main_bg1.png")',
+        'flag-main': 'url("@/assets/main_bg1.png")',
         flag: 'url("@/assets/background_flag.png")',
         'flag-w': 'url("@/assets/background_flag_w.png")',
       },

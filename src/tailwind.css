@@ -23,11 +23,18 @@
 }
 
 @layer components {
+  .after-underline {
+    @apply relative;
+    &::after {
+      @apply content-[''] absolute bottom-0 h-[4px] left-0 w-full;
+    }
+  }
+
   .ltr-underline {
     @apply relative;
 
     &::after {
-      @apply content-[''] absolute bg-black bottom-0 h-[4px] left-0 w-full scale-x-0 origin-bottom-right transition-transform duration-300;
+      @apply content-[''] absolute bottom-0 h-[4px] left-0 w-full scale-x-0 origin-bottom-right transition-transform duration-300;
     }
 
     &:hover::after {
