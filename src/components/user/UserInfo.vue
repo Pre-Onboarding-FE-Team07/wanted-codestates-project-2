@@ -38,7 +38,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import SelectButton from '@/components/user/SelectButton.vue';
+import SelectButton from '@/components/shared/SelectButton.vue';
 import RoundButton from '@/components/user/RoundButton.vue';
 
 export default defineComponent({
