@@ -11,9 +11,9 @@
         <span class="mx-3">{{ record.time }}</span>
         <span class="before:content-['#'] text-main italic text-2xl xl:text-4xl">{{ record.rank }}</span>
         <span class="before:content-['/'] text-main italic text-base xl:text-xl self-end">{{ record.participants }}</span>
-        <span class="mx-12 grow">{{ record.track }}</span>
-        <span class="mx-4">{{ record.kart }}</span>
-        <span class="mx-3">{{ record.lap }}</span>
+        <span class="mx-5 xl:mx-12 grow">{{ record.track }}</span>
+        <span class="mx-2 xl:mx-4">{{ record.kart }}</span>
+        <span class="mx-1 xl:mx-3">{{ record.lap }}</span>
         <button class="flex items-center justify-center h-full px-5 border-l">
           <span class="border-[6px] border-transparent border-t-gray-500" />
         </button>
