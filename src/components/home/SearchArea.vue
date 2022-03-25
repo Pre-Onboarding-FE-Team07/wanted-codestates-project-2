@@ -91,8 +91,9 @@ async function submit() {
       notFoundUser.value = false;
     }, 3000);
     nickname.value = '';
+  } else {
+    router.push(`/user/${lastQuery.value}`);
   }
-  router.push(`/user/${nickname.value}`);
 }
 </script>
 
