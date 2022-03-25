@@ -1,4 +1,6 @@
-export default function fetcher(url: string, options?: RequestInit) {
+import { toSnakeCase } from '@/utils/case-converter';
+
+export default async function fetcher(url: string, options?: RequestInit) {
   const newOptions = { ...options };
   newOptions.headers = {
     ...newOptions?.headers,
@@ -7,4 +9,10 @@ export default function fetcher(url: string, options?: RequestInit) {
   return fetch(url, newOptions)
     .then((res) => res.json())
     .catch((error) => error);
+}
+
+export function formatQueries(queries: { [key: string]: string | number | undefined; }) {
+  return Object
+    .entries(queries)
+    .reduce((result, [key, value], i) => `${result}${i ? '&' : '?'}${toSnakeCase(key)}=${value}`, '');
 }
