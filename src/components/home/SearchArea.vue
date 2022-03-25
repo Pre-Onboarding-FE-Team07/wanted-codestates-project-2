@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col overflow-hidden bg-center bg-cover bg-flag-main place-items-center place-content-center h-[500px] sm:h-[655px] w-full xl:w-full -mt-16">
+  <div class="relative flex flex-col overflow-hidden bg-center bg-cover bg-flag-main place-items-center place-content-center h-[500px] sm:h-[655px] w-full xl:w-full -mt-14">
     <div class="absolute inset-0 bg-[#005fcc] opacity-30" />
     <div class="absolute inset-0 top-12 max-w-[1400px] mx-auto xl:block hidden sm:block">
       <img

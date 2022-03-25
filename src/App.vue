@@ -1,8 +1,5 @@
 <template>
   <header-area />
-  <tab-navigation
-    :tabs="tabs"
-  />
   <router-view />
 </template>
 

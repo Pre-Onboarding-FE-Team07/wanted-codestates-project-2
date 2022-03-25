@@ -3,7 +3,7 @@
     :class="[`z-10 w-full max-w-[1300px] text-[${fontSize}px] bg-${bgColor}`]"
   >
     <ul
-      :class="`flex gap-${gap} text-gray-300`"
+      :class="`flex gap-${gap} text-gray-300 whitespace-nowrap`"
     >
       <li
         v-for="(tab, index) in tabs"
@@ -11,7 +11,7 @@
         :class="currentTabIndex === index ? `text-${textColor}` : ''"
       >
         <router-link
-          class="inline-block p-5 px-8"
+          class="inline-block p-4 px-8"
           :class="[
             textColor === 'main' ? 'after:bg-main' : 'after:bg-white' ,
             currentTabIndex === index ? 'after-underline' : 'ltr-underline',
@@ -37,7 +37,7 @@ export type Tab = {
 export type Tabs = Tab[];
 
 const props = withDefaults(defineProps<{
-  tabs: Tabs;
+  tabs?: Tabs;
   textColor? : 'main' | 'white';
   bgColor?: 'main' | 'transparent';
   fontSize?: number;
@@ -45,8 +45,14 @@ const props = withDefaults(defineProps<{
   startIndex?: number;
   gap?: number;
 }>(), {
+  tabs() {
+    return [
+      { to: '/', name: '홈' },
+      { to: '/rank', name: '랭킹' },
+    ];
+  },
   variant: 'main',
-  textColor: 'main',
+  textColor: 'white',
   bgColor: 'transparent',
   fontSize: 14,
   showSearch: false,
