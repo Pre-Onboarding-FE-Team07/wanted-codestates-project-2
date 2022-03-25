@@ -10,13 +10,12 @@
     <user-info :nickname="(route.params.nickname as string)" />
     <div class="w-full max-w-[1300px] pb-2 flex flex-row gap-2 h-[260px] overflow-x-auto overflow-hidden">
       <total-score-board
-        :game="game"
+        :game="games.length"
         :win="count.win"
         :rates="rates"
       />
       <rank-chart-board
-        :labels="rankRecords.labels.slice().reverse()"
-        :data="rankRecords.data.slice().reverse()"
+        :rank="rank"
       />
       <cheer-up-board />
     </div>
@@ -32,11 +31,14 @@
     </div>
     <section class="relative flex flex-col md:flex-row w-full max-w-[1300px] gap-2">
       <visual-record-board class="md:sticky top-3 h-fit" />
-      <record-column class="grow" />
+      <record-column
+        class="grow"
+        :records="games"
+      />
     </section>
   </div>
   <div
-    else
+    v-else
     class="flex items-center justify-center h-[90vh]"
   >
     <loading-indicator
@@ -50,10 +52,10 @@
 import TabNavigation, { Tabs } from '@/components/shared/TabNavigation.vue';
 import UserInfo from '@/components/user/UserInfo.vue';
 import TotalScoreBoard from '@/components/user/TotalScoreBoard.vue';
-import RankChartBoard from '@/components/user/RankChartBoard.vue';
+import RankChartBoard, { RankType } from '@/components/user/RankChartBoard.vue';
 import CheerUpBoard from '@/components/user/CheerUpBoard.vue';
 import VisualRecordBoard from '@/components/user/VisualRecordBoard.vue';
-import RecordColumn from '@/components/user/RecordColumn.vue';
+import RecordColumn, { MatchRecord } from '@/components/user/RecordColumn.vue';
 import LoadingIndicator from '@/components/shared/LoadingIndicator.vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
@@ -62,6 +64,8 @@ import { ActionTypes } from '@/store/types';
 import { Payload } from '@/store';
 import { MatchResponse } from '@/types/api.d';
 import { MatchType } from '@/constants/hash';
+import { getLapTime, getTimeDiff } from '@/utils/time';
+import { getKartByHash, getTrackByHash } from '@/utils/rosource';
 
 const store = useStore();
 const route = useRoute();
@@ -82,22 +86,19 @@ const count = ref({
   retire: 0,
 });
 
-const rank = ref({
-  within200: 0,
-  within50: 0,
+const rank = ref<RankType>({
+  data: [],
+  last: {
+    game: 0,
+    rate: 0,
+  },
+  recent: {
+    game: 0,
+    rate: 0,
+  },
 });
 
-const rankRecords = ref({
-  labels: Array.from({ length: 50 }, (_, i) => `이전 ${i + 1}경기`),
-  data: [] as number[],
-});
-
-const games = ref<Array<{
-  playerCount: number;
-  rank: number;
-  matchTime: number;
-  kart: string;
-}>>([]);
+const games = ref<Array<MatchRecord>>([]);
 
 onMounted(async () => {
   const { accessId } = await store.dispatch(ActionTypes.GET_USER_INFO_BY_NAME, {
@@ -118,31 +119,41 @@ onMounted(async () => {
 
   const { matches: [{ matches }] } = res;
 
-  let totalRankWithin200 = 0;
-  let totalRankWithin50 = 0;
-  matches.forEach(({ playerCount, player }, i) => {
+  let totalRankWide = 0;
+  let totalRankNarrow = 0;
+  matches.forEach((match, i) => {
+    const { player } = match;
+    const retire = player.matchRetired === '1';
+    const matchRank = retire ? 8 : +player.matchRank;
     count.value.win += +player.matchWin;
     count.value.retire += +player.matchRetired;
     count.value.goal += +!(+player.matchRetired);
-    totalRankWithin200 += +player.matchRank;
+    totalRankWide += +player.matchRank;
+    rank.value.last.game += 1;
     if (i < 50) {
-      rankRecords.value.data.push(+player.matchRank);
-      totalRankWithin50 += +player.matchRank;
+      rank.value.recent.game += 1;
+      rank.value.data.push(matchRank);
+      totalRankNarrow += +player.matchRank;
     }
     games.value.push({
-      playerCount,
-      rank: +player.matchRank,
-      matchTime: +player.matchTime,
-      kart: player.kart,
+      matchId: match.matchId,
+      playerCount: match.playerCount,
+      rank: matchRank,
+      matchTime: retire ? '-' : getLapTime(+player.matchTime),
+      kart: getKartByHash(player.kart),
+      track: getTrackByHash(match.trackId),
+      win: player.matchWin === '1',
+      retire: player.matchRetired === '1',
+      diffTime: getTimeDiff(new Date(match.endTime)),
     });
   });
 
-  rates.value.win = Math.round((count.value.win / 200) * 100);
-  rates.value.retire = Math.round((count.value.retire / 200) * 100);
+  rates.value.win = Math.round((count.value.win / rank.value.last.game) * 100);
+  rates.value.retire = Math.round((count.value.retire / rank.value.last.game) * 100);
   rates.value.goal = 100 - rates.value.retire;
 
-  rank.value.within200 = +(totalRankWithin200 / game).toFixed(2);
-  rank.value.within50 = +(totalRankWithin50 / 50).toFixed(2);
+  rank.value.last.rate = +(totalRankWide / game).toFixed(2);
+  rank.value.recent.rate = +(totalRankNarrow / games.value.length).toFixed(2);
 
   initLoaded.value = true;
 });
