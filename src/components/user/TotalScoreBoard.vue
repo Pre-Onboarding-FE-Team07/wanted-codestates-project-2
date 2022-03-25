@@ -4,9 +4,9 @@
       <span class="text-main">종합</span> 전적
     </template>
     <template #sub-header>
-      <span>200전</span>
-      <span>135승</span>
-      <span>65패</span>
+      <span>{{ game }}전</span>
+      <span>{{ win }}승</span>
+      <span>{{ game - win }}패</span>
     </template>
     <template #content>
       <div class="flex justify-between">
@@ -35,19 +35,31 @@
 <script lang="ts" setup>
 import CircleProgress from '@/components/shared/CircleProgress.vue';
 import BoardContainer from '@/components/user/BoardContainer.vue';
+import { ref } from 'vue';
 
-const progressList = [{
-  title: '승률',
-  color: '#07f',
-  value: 68,
-}, {
-  title: '완주율',
-  color: '#9bd728',
-  value: 99,
-}, {
-  title: '리타이어율',
-  color: '#f62459',
-  value: 1,
-},
-];
+const props = withDefaults(defineProps<{
+  game: number;
+  win: number;
+  rates: {
+    win: number;
+    goal: number;
+    retire: number;
+  }
+}>(), {});
+
+const progressList = ref([
+  {
+    title: '승률',
+    color: '#07f',
+    value: props.rates.win,
+  }, {
+    title: '완주율',
+    color: '#9bd728',
+    value: props.rates.goal,
+  }, {
+    title: '리타이어율',
+    color: '#f62459',
+    value: props.rates.retire,
+  },
+]);
 </script>
