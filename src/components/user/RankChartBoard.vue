@@ -30,8 +30,13 @@ Chart.register(...registerables);
 
 const canvasRef = ref();
 
+const props = defineProps<{
+  labels: string[];
+  data: number[];
+}>();
+
 const data: ChartData<'line'> = {
-  labels: [...Array(20)].map((_, i) => `Label ${i + 1}`),
+  labels: props.labels,
   datasets: [
     {
       fill: false,
@@ -39,7 +44,8 @@ const data: ChartData<'line'> = {
       borderWidth: 1,
       pointBackgroundColor: colors.main,
       pointRadius: 2,
-      data: [...Array(20)].map(() => Math.random() * 10),
+      data: props.data,
+      tension: 0.2,
     },
   ],
 };
@@ -55,6 +61,11 @@ const options: ChartOptions<'line'> = {
       position: 'top',
       display: false,
     },
+    y: {
+      reverse: true,
+      min: 1,
+      max: 8,
+    },
   },
 };
 
@@ -66,5 +77,4 @@ onMounted(() => {
     options,
   });
 });
-
 </script>
