@@ -2,3 +2,8 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[redirects]]
+  from = "/proxy/*"
+  to = "https://api.nexon.co.kr/kart/v1.0/:splat"
+  status = 200
