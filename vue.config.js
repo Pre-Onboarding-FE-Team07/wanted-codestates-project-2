@@ -16,7 +16,7 @@ module.exports = defineConfig({
   },
   devServer: {
     proxy: {
-      '/v1.0': {
+      [process.env.VUE_APP_OPEN_API_URL]: {
         target: 'https://api.nexon.co.kr/kart',
       },
     },
