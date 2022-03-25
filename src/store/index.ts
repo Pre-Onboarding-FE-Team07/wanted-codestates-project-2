@@ -1,7 +1,6 @@
 import { ActionTypes } from '@/store/types';
 import fetcher, { formatQueries } from '@/utils/fetcher';
 import { createStore } from 'vuex';
-import { OPEN_API_URL } from '../constants/api';
 
 export type Payload = {
   variables: {
@@ -30,7 +29,7 @@ export default createStore<{
   actions: {
     async [ActionTypes.GET_USER_INFO_BY_NAME](context, payload: Payload) {
       try {
-        return await fetcher(`${OPEN_API_URL}/users/nickname/${payload.variables.name}`);
+        return await fetcher(`${process.env.VUE_APP_OPEN_API_URL}/users/nickname/${payload.variables.name}`);
       } catch (error) {
         return null;
       }
@@ -38,7 +37,7 @@ export default createStore<{
     async [ActionTypes.GET_MATCH_LIST_BY_ID](context, payload: Payload) {
       try {
         const queries = formatQueries(payload.queries || {});
-        return await fetcher(`${OPEN_API_URL}/users/${payload.variables.id}/matches${queries}`);
+        return await fetcher(`${process.env.VUE_APP_OPEN_API_URL}/users/${payload.variables.id}/matches${queries}`);
       } catch (error) {
         return null;
       }
