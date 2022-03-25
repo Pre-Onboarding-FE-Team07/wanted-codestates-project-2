@@ -22,7 +22,7 @@
         />
       </div>
     </div>
-    <div class="w-full pt-16 overflow-x-scroll md:w-fit">
+    <div class="w-full pt-16 pb-1 overflow-x-scroll md:overflow-hidden md:w-fit">
       <top-rank />
     </div>
   </section>
