@@ -4,8 +4,8 @@
   status = 200
 
 [[redirects]]
-  from = "/v1.0/proxy/*"
-  to = "https://api.nexon.co.kr/kart/:splat"
+  from = "/v1.0/*"
+  to = "https://api.nexon.co.kr/kart/v1.0/:splat"
   status = 200
   force = true
   headers = {Access-Control-Allow-Origin = "*"}
