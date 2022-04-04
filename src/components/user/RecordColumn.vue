@@ -7,69 +7,14 @@
       :key="record.matchId"
       class="flex flex-col"
     >
-      <div
-        class="flex items-center justify-between py-3 overflow-x-auto text-sm border-l-4 border-r border-y xl:text-base"
-        :class="record.win
-          ? 'bg-sky-50 border-sky-200 border-l-main'
-          : record.retire ? 'bg-red-50 border-red-200 border-l-red-600' : 'bg-white border-gray-300'"
-      >
-        <span class="mx-3 text-xs">{{ record.relTime }}</span>
-        <div
-          class="min-w-[120px]"
-          :class="record.win ? 'text-main' : record.retire ? 'text-red-500' : 'text-gray-500'"
-        >
-          <span
-            class="before:content-['#']  italic text-2xl xl:text-3xl"
-          >{{ record.retire ? '리타이어' : record.rank }}</span>
-          <span
-            v-if="!record.retire"
-            class="before:content-['/'] italic text-base xl:text-xl self-end"
-          >{{ record.playerCount }}</span>
-        </div>
-        <span class="mx-5 xl:mx-12 grow">{{ record.track.name }}</span>
-        <span class="mx-2 xl:mx-4">{{ record.kart.name }}</span>
-        <span class="text-center mx-1 xl:mx-3 min-w-[50px]">{{ record.matchTime }}</span>
-        <button class="flex items-center justify-center h-full px-5 border-l">
-          <span class="border-[6px] border-transparent border-t-gray-500 mt-1" />
-        </button>
-      </div>
+      <record-row :record="record" />
     </li>
   </ul>
 </template>
 
 <script lang="ts" setup>
-export type RankRecord = {
-  rank: number;
-  participants: number;
-  track: string;
-  kart: string;
-  time: string;
-  lap: string;
-};
-
-export type Kart = {
-  hash: string;
-  name: string;
-  img: string;
-};
-
-export type Track = {
-  hash: string;
-  name: string;
-  img: string;
-};
-
-export type MatchRecord = {
-  matchId: string;
-  playerCount: number;
-  rank: number;
-  matchTime: string;
-  kart: Kart;
-  track: Track;
-  win: boolean;
-  retire: boolean;
-  relTime: string;
-}
+import RecordRow from '@/components/user/RecordRow.vue';
+import { MatchRecord } from '@/netlify/types/api';
 
 defineProps<{
   records: MatchRecord[];
