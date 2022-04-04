@@ -26,33 +26,43 @@
         />
       </div>
     </div>
-    <div class="w-full pt-16 pb-1 overflow-x-scroll md:overflow-hidden md:w-fit">
-      <top-rank />
-    </div>
-  </section>
-  <rank-table class="-mt-16">
-    <tr
-      v-for="(ranker, index) in rankers"
-      :key="index"
-      class="text-center bg-white cursor-pointer group hover:text-main"
+    <transition
+      name="top-rank"
+      appear
     >
-      <td class="py-2 border-l border-y group-hover:border-main">
-        {{ index + 4 }}
-      </td>
-      <td class="text-left border-y group-hover:border-main">
-        {{ ranker.name }}
-      </td>
-      <td class="border-y group-hover:border-main">
-        {{ ranker.point.toLocaleString() || 0 }} PT
-      </td>
-      <td class="border-y group-hover:border-main">
-        {{ ranker.driveCount }}회
-      </td>
-      <td class="border-r border-y group-hover:border-main">
-        {{ ranker.avgRank }} 위
-      </td>
-    </tr>
-  </rank-table>
+      <div class="w-full pt-16 pb-1 overflow-x-scroll md:overflow-hidden md:w-fit">
+        <top-rank />
+      </div>
+    </transition>
+  </section>
+  <transition
+    name="rank-table"
+    appear
+  >
+    <rank-table class="-mt-16">
+      <tr
+        v-for="(ranker, index) in rankers"
+        :key="index"
+        class="text-center bg-white cursor-pointer group hover:text-main"
+      >
+        <td class="py-2 border-l border-y group-hover:border-main">
+          {{ index + 4 }}
+        </td>
+        <td class="text-left border-y group-hover:border-main">
+          {{ ranker.name }}
+        </td>
+        <td class="border-y group-hover:border-main">
+          {{ ranker.point.toLocaleString() || 0 }} PT
+        </td>
+        <td class="border-y group-hover:border-main">
+          {{ ranker.driveCount }}회
+        </td>
+        <td class="border-r border-y group-hover:border-main">
+          {{ ranker.avgRank }} 위
+        </td>
+      </tr>
+    </rank-table>
+  </transition>
 </template>
 
 <script lang="ts" setup>
@@ -76,3 +86,24 @@ const rankers = Array(50).fill({
   name: '1234Kcm', point: 3608, driveCount: '508', avgRank: 2.3,
 });
 </script>
+
+<style lang="postcss" scoped>
+.top-rank-enter-active,
+.rank-table-enter-active {
+  @apply transition-all duration-700 ease-in-out;
+}
+
+.top-rank-enter-from,
+.rank-table-enter-from {
+  @apply opacity-0 translate-y-8;
+}
+
+.top-rank-enter-to,
+.rank-table-enter-to {
+  @apply opacity-100 translate-y-0;
+}
+
+.rank-table-enter-active {
+  @apply delay-300;
+}
+</style>
