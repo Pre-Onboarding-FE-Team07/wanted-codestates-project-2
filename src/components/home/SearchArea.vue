@@ -44,13 +44,18 @@
       </transition>
     </div>
     <div class="relative flex flex-col items-center w-full px-10 text-white">
-      <header class="text-center">
-        <span class="text-[28px] leading-4">넥슨 오픈 API 기반</span>
-        <h1 class="my-1 text-[40px] leading-10 break-words whitespace-nowrap">
-          카트라이더 <b>전적</b> 검색
-        </h1>
-        <small class="block my-2 mx-auto px-16 rounded-full w-fit text-lg tracking-widest bg-[rgba(0,0,0,0.3)]">사회적거리두기</small>
-      </header>
+      <transition
+        name="header"
+        appear
+      >
+        <header class="text-center">
+          <span class="text-[28px] leading-4">넥슨 오픈 API 기반</span>
+          <h1 class="my-1 text-[40px] leading-10 break-words whitespace-nowrap">
+            카트라이더 <b>전적</b> 검색
+          </h1>
+          <small class="block my-2 mx-auto px-16 rounded-full w-fit text-lg tracking-widest bg-[rgba(0,0,0,0.3)]">사회적거리두기</small>
+        </header>
+      </transition>
       <transition
         name="form"
         appear
@@ -93,11 +98,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ActionTypes } from '@/store/types';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { Payload } from '@/types/vuex';
+import { ActionTypes } from '@/store/types';
 
 const nickname = ref('');
 const lastQuery = ref('');
@@ -159,13 +164,22 @@ async function submit() {
 .ch-mv-r-enter-active,
 .bg-mv-r-enter-active,
 .ch-mv-l-enter-active,
-.bg-mv-l-enter-active {
+.bg-mv-l-enter-active,
+.header-enter-active {
   @apply transition-all duration-500 ease-out;
 }
 
 .bg-mv-r-enter-active,
 .bg-mv-l-enter-active {
   @apply delay-150;
+}
+
+.header-enter-from {
+  @apply opacity-0 translate-y-10;
+}
+
+.header-enter-to {
+  @apply opacity-100 translate-y-0;
 }
 
 .form-enter-active {
