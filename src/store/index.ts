@@ -35,6 +35,16 @@ export default createStore<{
         return null;
       }
     },
+    async [ActionTypes.GET_MATCH_DETAILS](_, payload: Payload) {
+      const { matchId } = payload.queries || {};
+      const url = `${API_URL}/get-match-details?matchId=${matchId}`;
+      try {
+        const { data } = await axios.get(url);
+        return data;
+      } catch (error) {
+        return null;
+      }
+    },
   },
   modules: {
   },
