@@ -20,9 +20,8 @@
       "webpack-env"
     ],
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"],
+      "@/netlify/*": ["netlify/*"]
     },
     "lib": [
       "esnext",
