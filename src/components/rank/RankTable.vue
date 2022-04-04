@@ -1,27 +1,29 @@
 <template>
-  <table
-    class="w-full max-w-[1000px] border-separate"
-    style="border-spacing: 0 6px;"
-  >
-    <thead
-      ref="theadRef"
-      class="sticky top-0 z-10"
-      :class="{ 'bg-darken' : theadSticky}"
+  <transition name="fade-up">
+    <table
+      class="w-full max-w-[1000px] border-separate"
+      style="border-spacing: 0 6px;"
     >
-      <tr class="text-sm text-white whitespace-nowrap">
-        <th class="px-3 py-5">
-          #
-        </th>
-        <th>닉네임 (순위변동)</th>
-        <th>누적포인트 (전일대비)</th>
-        <th>주행횟수</th>
-        <th>평균순위</th>
-      </tr>
-    </thead>
-    <tbody>
-      <slot />
-    </tbody>
-  </table>
+      <thead
+        ref="theadRef"
+        class="sticky top-0 z-10"
+        :class="{ 'bg-darken' : theadSticky}"
+      >
+        <tr class="text-sm text-white whitespace-nowrap">
+          <th class="px-3 py-5">
+            #
+          </th>
+          <th>닉네임 (순위변동)</th>
+          <th>누적포인트 (전일대비)</th>
+          <th>주행횟수</th>
+          <th>평균순위</th>
+        </tr>
+      </thead>
+      <tbody>
+        <slot />
+      </tbody>
+    </table>
+  </transition>
 </template>
 
 <script lang="ts" setup>
@@ -45,3 +47,7 @@ onUnmounted(() => {
 });
 
 </script>
+
+<style scoped>
+
+</style>

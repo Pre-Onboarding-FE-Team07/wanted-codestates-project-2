@@ -28,8 +28,8 @@
                 :src="record.icon"
                 alt=""
               >
-              <span>{{ record.track }}</span>
-              <span>{{ record.lapTime }}</span>
+              <span class="whitespace-nowrap">{{ record.track }}</span>
+              <span class="whitespace-nowrap">{{ record.lapTime }}</span>
             </li>
           </ul>
         </div>

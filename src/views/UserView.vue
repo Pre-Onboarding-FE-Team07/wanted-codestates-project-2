@@ -29,8 +29,8 @@
         :gap="0"
       />
     </div>
-    <section class="relative flex flex-col md:flex-row w-full max-w-[1300px] gap-2">
-      <visual-record-board class="md:sticky top-3 h-fit" />
+    <section class="relative flex flex-col lg:flex-row w-full max-w-[1300px] gap-2">
+      <visual-record-board class="lg:sticky top-3 h-fit lg:min-w-[360px]" />
       <record-column
         class="grow"
         :records="data.records"

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col max-w-[440px] mx-auto">
     <div class="flex justify-between w-full text-gray-500 bg-gray-200">
       <button
         v-for="(tab, index) in ['트랙', '카트']"
