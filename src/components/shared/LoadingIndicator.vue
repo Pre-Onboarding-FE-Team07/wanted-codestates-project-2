@@ -19,7 +19,9 @@
         fill="transparent"
         :stroke="colors.main"
         :stroke-width="stroke"
-        class="rotate"
+        class="animate-spin origin-center"
+        :stroke-dasharray="circumference"
+        :stroke-dashoffset="circumference / 3"
       />
     </svg>
     <span
@@ -41,25 +43,7 @@ const props = withDefaults(defineProps<{
   desc: '',
 });
 
-const stroke = computed(() => props.size / 10);
+const stroke = computed(() => props.size / 5);
 const radius = computed(() => props.size - stroke.value);
 const circumference = computed(() => 2 * Math.PI * (props.size - stroke.value));
 </script>
-
-<style scoped>
-.rotate {
-  stroke-dasharray: v-bind(circumference);
-  stroke-dashoffset: calc(v-bind(circumference) / 3);
-  animation: rotate 1.5s linear infinite reverse;
-  transform-origin: center;
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-</style>
