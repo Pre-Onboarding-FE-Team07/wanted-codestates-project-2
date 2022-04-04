@@ -1,6 +1,6 @@
 import { API_URL, MatchType } from '@/netlify/constants/api';
 import {
-  MatchData, MatchRecord, RankChartData, RankInfo,
+  MatchRecord, MatchResponseDTO, RankChartData, RankInfo,
 } from '@/netlify/types/api';
 import axiosInstance from '@/netlify/utils/axios';
 import { protectHandler } from '@/netlify/utils/error-handler';
@@ -31,7 +31,7 @@ export const handler: Handler = protectHandler(async (event) => {
     match_types: getMatchTypeHash(matchType || 'solo'),
   });
 
-  const { status, data }: AxiosResponse<MatchData> = await axiosInstance.get(url);
+  const { status, data }: AxiosResponse<MatchResponseDTO> = await axiosInstance.get(url);
 
   const { matches: [{ matches }], nickName } = data;
 
@@ -83,7 +83,7 @@ export const handler: Handler = protectHandler(async (event) => {
     }
     records.push({
       matchId: match.matchId,
-      playerCount: match.playerCount,
+      playerCount: +match.playerCount,
       rank: matchRank,
       matchTime: retire ? '-' : getLapTime(+player.matchTime),
       kart: getKartByHash(player.kart),
