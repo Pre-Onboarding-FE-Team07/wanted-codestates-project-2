@@ -156,7 +156,7 @@ export type MatchResponseDTO = {
   matches: Array<MatchDTO>
 };
 
-export type MatchDetailsDTO<Team extends TeamDTO | PlayerDTO = PlayerDTO> = {
+export type MatchDetailsDTO = {
   /**
    * 매치 아이디
    */
@@ -183,9 +183,14 @@ export type MatchDetailsDTO<Team extends TeamDTO | PlayerDTO = PlayerDTO> = {
   playTime: string;
 
   /**
-   * 참여 팀 정보 목록 | 참여 유저 정보 목록 (매치 종류에 따름)
+   * 참여 팀 정보 목록 (팀전)
    */
-  teams: Array<Team>;
+  teams?: Array<TeamDTO>;
+
+  /**
+   * 참여 사용자 정보 목록 (개인전)
+   */
+  players?: Array<PlayerDTO>;
 }
 
 export type RankInfo = {
@@ -290,6 +295,7 @@ export type Track = {
 };
 
 export type MatchRecord = {
+  userId: string;
   matchId: string;
   playerCount: number;
   rank: number;
@@ -300,3 +306,16 @@ export type MatchRecord = {
   retire: boolean;
   relTime: string;
 };
+
+export type ModeType = 'team' | 'solo';
+
+export type SpeedType = 'combine' | 'fastest' | 'infinite';
+
+export type MatchDetailInfo = {
+  userId: string;
+  username: string;
+  kart: Kart;
+  lapTime: string;
+  retire: boolean;
+  rank: number | string;
+}

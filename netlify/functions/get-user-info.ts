@@ -11,13 +11,10 @@ import { AxiosResponse } from 'axios';
 
 type Query = {
   userId?: string;
-  matchType?: 'team' | 'solo';
 };
 
-const getMatchTypeHash = (matchType: Query['matchType']) => (matchType === 'solo' ? MatchType.INDI : MatchType.TEAM);
-
 export const handler: Handler = protectHandler(async (event) => {
-  const { userId, matchType }: Query = event.queryStringParameters || {};
+  const { userId }: Query = event.queryStringParameters || {};
 
   if (!userId) {
     return {
@@ -28,7 +25,7 @@ export const handler: Handler = protectHandler(async (event) => {
 
   const url = API_URL.GET_MATCH_LIST_BY_USER_ID(userId, {
     limit: 500,
-    match_types: getMatchTypeHash(matchType || 'solo'),
+    match_types: MatchType.SPEED_INDI_COMB,
   });
 
   const { status, data }: AxiosResponse<MatchResponseDTO> = await axiosInstance.get(url);
@@ -83,6 +80,7 @@ export const handler: Handler = protectHandler(async (event) => {
     }
     records.push({
       matchId: match.matchId,
+      userId: match.accountNo,
       playerCount: +match.playerCount,
       rank: matchRank,
       matchTime: retire ? '-' : getLapTime(+player.matchTime),
