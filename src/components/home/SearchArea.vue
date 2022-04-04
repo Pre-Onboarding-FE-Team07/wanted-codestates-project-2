@@ -51,35 +51,43 @@
         </h1>
         <small class="block my-2 mx-auto px-16 rounded-full w-fit text-lg tracking-widest bg-[rgba(0,0,0,0.3)]">사회적거리두기</small>
       </header>
-      <form
-        class="relative flex justify-between w-full gap-2 px-6 border-4 border-white rounded-full max-w-[600px] mt-16"
-        @submit.prevent="submit"
+      <transition
+        name="form"
+        appear
       >
-        <label
-          for="main-search-bar"
-          class="grow"
+        <form
+          class="relative flex justify-between gap-2 w-full px-6 border-4 border-white rounded-full max-w-[600px] min-w-[90px] mt-16"
+          @submit.prevent="submit"
         >
-          <input
-            id="main-search-bar"
-            v-model="nickname"
-            class="w-full py-3 text-sm bg-transparent placeholder:text-gray-200 placeholder:opacity-80 sm:text-xl"
-            type="text"
-            placeholder="카트라이더 닉네임을 입력하세요!"
+          <label
+            for="main-search-bar"
+            class="grow"
           >
-        </label>
-        <button type="submit">
-          <img
-            src="@/assets/tmi_logo_default.svg"
-            alt=""
+            <input
+              id="main-search-bar"
+              v-model="nickname"
+              class="w-full py-3 pr-14 text-sm bg-transparent placeholder:text-gray-200 placeholder:opacity-80 sm:text-xl"
+              type="text"
+              placeholder="카트라이더 닉네임을 입력하세요!"
+            >
+          </label>
+          <button
+            type="submit"
+            class="absolute right-5 top-1/2 -translate-y-1/2"
           >
-        </button>
-        <transition name="shake">
-          <span
-            v-if="notFoundUser"
-            class="absolute inset-x-0 mt-2 text-sm text-center -bottom-10"
-          >{{ lastQuery }}와 일치하는 라이더가 없습니다.</span>
-        </transition>
-      </form>
+            <img
+              src="@/assets/tmi_logo_default.svg"
+              alt=""
+            >
+          </button>
+          <transition name="shake">
+            <span
+              v-if="notFoundUser"
+              class="absolute inset-x-0 mt-2 text-sm text-center -bottom-10"
+            >{{ lastQuery }}와 일치하는 라이더가 없습니다.</span>
+          </transition>
+        </form>
+      </transition>
     </div>
   </div>
 </template>
@@ -159,4 +167,15 @@ async function submit() {
   @apply delay-150;
 }
 
+.form-enter-active {
+  @apply transition-width duration-500 md:duration-1000 lg:duration-[1.5s] ease-in-out delay-[25ms];
+}
+
+.form-enter-from {
+  @apply w-[93px];
+}
+
+.form-enter-to {
+  @apply w-full;
+}
 </style>
