@@ -29,11 +29,23 @@
     </button>
   </div>
   <div v-if="opened">
-    <ul class="flex bg-white text-center shadow-sm justify-between">
+    <div
+      v-if="loading"
+      class="h-[172px] bg-white border flex justify-center items-center"
+    >
+      <loading-indicator
+        :size="20"
+        desc="정보를 불러오는 중입니다."
+      />
+    </div>
+    <ul
+      v-else
+      class="flex bg-white text-center shadow-sm justify-between border"
+    >
       <li
         v-for="match in matchDetails"
         :key="match.rank"
-        class="flex flex-col w-[11.11%] text-xs"
+        class="flex flex-col w-1/6 text-xs"
         :class="{ 'bg-[#f2f3f4] text-main' : match.userId === record.userId }"
       >
         <div
@@ -66,6 +78,7 @@
 </template>
 
 <script lang="ts" setup>
+import LoadingIndicator from '@/components/shared/LoadingIndicator.vue';
 import { MatchDetailInfo, MatchRecord } from '@/netlify/types/api';
 import { ActionTypes } from '@/store/types';
 import { Payload } from '@/types/vuex';
@@ -105,8 +118,11 @@ const emptyInfo: MatchDetailInfo = {
   retire: false,
 };
 
+matchDetails.value.push(...Array(8).fill(emptyInfo));
+
 const opened = ref(false);
 const loading = ref(false);
+const once = ref(false);
 
 function fallbackEmptyKartImg(event: Event) {
   /* eslint-disable-next-line no-param-reassign */
@@ -115,14 +131,32 @@ function fallbackEmptyKartImg(event: Event) {
 
 onUpdated(async () => {
   if (opened.value) {
-    if (matchDetails.value.length > 1) return;
+    if (once.value) return;
     loading.value = true;
     const response = await store.dispatch(ActionTypes.GET_MATCH_DETAILS, {
       queries: { matchId: props.record.matchId },
     } as Payload);
 
-    matchDetails.value.push(...Object.assign(Array(8).fill(emptyInfo), response));
+    matchDetails.value.splice(1, response.length, ...response);
     loading.value = false;
+    once.value = true;
   }
 });
 </script>
+
+<style lang="postcss" scoped>
+.v-enter-active,
+.v-leave-active {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.v-enter-from,
+.v-leave-to {
+  @apply h-0;
+}
+
+.v-enter-to,
+.v-leave-from {
+  @apply h-fit;
+}
+</style>
