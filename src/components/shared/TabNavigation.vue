@@ -1,29 +1,34 @@
 <template>
-  <nav
-    :class="[`z-10 w-full max-w-[1300px] text-[${fontSize}px] bg-${bgColor}`]"
+  <div
+    class="w-full z-10"
+    :class="`bg-${bgColor}`"
   >
-    <ul
-      :class="`flex gap-${gap} text-gray-300 whitespace-nowrap`"
+    <nav
+      :class="[`w-full mx-auto max-w-[1300px] text-[${fontSize}px] `]"
     >
-      <li
-        v-for="(tab, index) in tabs"
-        :key="index"
-        :class="currentTabIndex === index ? `text-${textColor}` : ''"
+      <ul
+        :class="`flex gap-${gap} text-gray-300 whitespace-nowrap`"
       >
-        <router-link
-          class="inline-block p-4 px-8"
-          :class="[
-            textColor === 'main' ? 'after:bg-main' : 'after:bg-white' ,
-            currentTabIndex === index ? 'after-underline' : 'ltr-underline',
-          ]"
-          :to="tab.to"
-          @click="currentTabIndex = index"
+        <li
+          v-for="(tab, index) in tabs"
+          :key="index"
+          :class="currentTabIndex === index ? `text-${textColor}` : `hover:text-${textColor}`"
         >
-          {{ tab.name }}
-        </router-link>
-      </li>
-    </ul>
-  </nav>
+          <router-link
+            class="inline-block p-4 px-8"
+            :class="[
+              textColor === 'main' ? 'after:bg-main' : 'after:bg-white' ,
+              currentTabIndex === index ? 'after-underline' : 'ltr-underline',
+            ]"
+            :to="tab.to"
+            @click="currentTabIndex = index"
+          >
+            {{ tab.name }}
+          </router-link>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </template>
 
 <script lang="ts" setup>
