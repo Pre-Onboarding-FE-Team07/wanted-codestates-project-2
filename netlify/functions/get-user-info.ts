@@ -1,4 +1,4 @@
-import { API_URL, MatchType } from '@/netlify/constants/api';
+import { API_URL, MatchType, RESOURCE_URL } from '@/netlify/constants/api';
 import {
   MatchRecord, MatchResponseDTO, RankChartData, RankInfo,
 } from '@/netlify/types/api';
@@ -63,6 +63,7 @@ export const handler: Handler = protectHandler(async (event) => {
 
   let totalRank = 0;
   let recentRank = 0;
+  let avatarUrl = '';
   matches.forEach((match, i) => {
     const { player } = match;
     const retire = player.matchRetired === '1';
@@ -72,6 +73,7 @@ export const handler: Handler = protectHandler(async (event) => {
     rankInfo.count.goal += +!retire;
     totalRank += +matchRank;
     rankChartData.total.gameCount += 1;
+    if (!avatarUrl) avatarUrl = RESOURCE_URL.AVATAR_IMG(match.character);
     if (i < 50) {
       rankChartData.recent.gameCount += 1;
       rankChartData.labels.push(`이전 ${i + 1}경기`);
@@ -109,6 +111,7 @@ export const handler: Handler = protectHandler(async (event) => {
     body: JSON.stringify({
       userId,
       username: nickName,
+      avatarUrl,
       rankInfo,
       rankChartData,
       records,

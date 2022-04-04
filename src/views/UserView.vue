@@ -7,7 +7,10 @@
     v-if="initLoaded"
     class="flex flex-col items-center w-full gap-1"
   >
-    <user-info :nickname="(route.params.nickname as string)" />
+    <user-info
+      :avatar="data.avatarUrl"
+      :username="(route.params.nickname as string)"
+    />
     <div class="w-full max-w-[1300px] pb-2 flex flex-row gap-2 h-[260px] overflow-x-auto overflow-hidden">
       <total-score-board
         :game="data.rankInfo.totalGame"
@@ -70,10 +73,12 @@ const route = useRoute();
 const initLoaded = ref(false);
 
 const data = ref<{
+  avatarUrl: string;
   rankInfo: RankInfo;
   rankChartData: RankChartData;
   records: MatchRecord[];
 }>({
+  avatarUrl: '',
   rankInfo: {
     totalGame: 0,
     count: {

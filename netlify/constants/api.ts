@@ -14,7 +14,7 @@ export const API_URL = {
 export const RESOURCE_URL = {
   KART_NAMES: 'https://tmi.nexon.com/apis/KartNames',
   TRACK_NAMES: 'https://tmi.nexon.com/apis/TrackNames',
-  AVATAR: (characterId: string) => `https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/character/${characterId}.png`,
+  AVATAR_IMG: (characterId: string) => `https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/character/${characterId}.png`,
   KART_IMG: (kartId: string) => `https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/kart/${kartId}.png`,
   TRACK_IMG: (category: string) => `https://s3-ap-northeast-1.amazonaws.com/solution-userstats/kartimg/Category/${category}.png`,
 } as const;

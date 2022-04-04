@@ -3,13 +3,13 @@
     <span class="absolute text-xs text-gray-600 -top-6">카트라이더 매치데이터는 최근 1년치 데이터만 확인할 수 있습니다.</span>
     <img
       width="164"
-      src="@/assets/sample/avatar.png"
+      :src="avatar"
       alt=""
     >
     <div class="grow">
       <div>
         <h1 class="mb-6 text-5xl font-black text-center md:text-left">
-          {{ nickname }}
+          {{ username }}
         </h1>
       </div>
       <div class="flex items-center">
@@ -41,6 +41,7 @@ import SelectButton from '@/components/shared/SelectButton.vue';
 import RoundButton from '@/components/user/RoundButton.vue';
 
 withDefaults(defineProps<{
-  nickname: string;
+  avatar: string;
+  username: string;
 }>(), {});
 </script>
