@@ -65,11 +65,11 @@
 </template>
 
 <script lang="ts" setup>
-import { Payload } from '@/store';
 import { ActionTypes } from '@/store/types';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import { Payload } from '@/types/vuex';
 
 const nickname = ref('');
 const lastQuery = ref('');
@@ -81,10 +81,10 @@ const notFoundUser = ref(false);
 let timeoutId = -1;
 async function submit() {
   lastQuery.value = nickname.value;
-  const { accessId } = await store.dispatch(ActionTypes.GET_USER_INFO_BY_NAME, {
-    variables: { name: nickname.value },
-  } as Payload);
-  if (!accessId) {
+  const { userId } = await store.dispatch(ActionTypes.GET_USER_ID, {
+    queries: { username: nickname.value },
+  } as Payload) || {};
+  if (!userId) {
     notFoundUser.value = true;
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {

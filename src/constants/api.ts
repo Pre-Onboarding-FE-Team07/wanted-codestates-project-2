@@ -1,1 +1,1 @@
-export const OPEN_API_URL = '/v1.0';
+export const API_URL = '/.netlify/functions';

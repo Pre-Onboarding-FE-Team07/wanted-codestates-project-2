@@ -1,20 +1,8 @@
+import { API_URL } from '@/constants/api';
 import { ActionTypes } from '@/store/types';
-import fetcher, { formatQueries } from '@/utils/fetcher';
+import { Payload } from '@/types/vuex';
+import axios from 'axios';
 import { createStore } from 'vuex';
-
-export type Payload = {
-  variables: {
-    id?: string;
-    name?: string;
-  },
-  queries?: {
-    startDate?: string;
-    endDate?: string;
-    offset?: number;
-    limit?: number;
-    matchTypes?: string;
-  },
-}
 
 export default createStore<{
   currentRoute: string;
@@ -27,17 +15,11 @@ export default createStore<{
   mutations: {
   },
   actions: {
-    async [ActionTypes.GET_USER_INFO_BY_NAME](context, payload: Payload) {
+    async [ActionTypes.GET_USER_ID](_, payload: Payload) {
+      const url = `${API_URL}/get-user-id?username=${payload.queries?.username}`;
       try {
-        return await fetcher(`${process.env.VUE_APP_OPEN_API_URL}/users/nickname/${payload.variables.name}`);
-      } catch (error) {
-        return null;
-      }
-    },
-    async [ActionTypes.GET_MATCH_LIST_BY_ID](context, payload: Payload) {
-      try {
-        const queries = formatQueries(payload.queries || {});
-        return await fetcher(`${process.env.VUE_APP_OPEN_API_URL}/users/${payload.variables.id}/matches${queries}`);
+        const { data: message } = await axios.get(url);
+        return message as string;
       } catch (error) {
         return null;
       }
