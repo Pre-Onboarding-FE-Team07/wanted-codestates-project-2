@@ -108,6 +108,7 @@ const notFoundUser = ref(false);
 
 let timeoutId = -1;
 async function submit() {
+  notFoundUser.value = false;
   lastQuery.value = nickname.value;
   const { userId } = await store.dispatch(ActionTypes.GET_USER_ID, {
     queries: { username: nickname.value },
