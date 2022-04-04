@@ -18,6 +18,7 @@ module.exports = {
       animation: {
         wave: 'wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;',
         'second-wave': 'wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s  infinite, swell 7s ease -1.25s infinite;',
+        shake: 'shake 0.5s cubic-bezier(.36,.07,.19,.97)',
       },
       keyframes: {
         wave: {
@@ -25,8 +26,22 @@ module.exports = {
           '100%': { 'margin-left': '-1600px' },
         },
         swell: {
-          '0%, 100%': { transformZ: 'translateY(-25px)' },
+          '0%, 100%': { transform: 'translateY(-25px)' },
           '50%': { transform: 'translateY(5px)' },
+        },
+        shake: {
+          '10%, 90%': {
+            transform: 'translateX(-1px)',
+          },
+          '20%, 80%': {
+            transform: 'translateX(2px)',
+          },
+          '30%, 50%, 70%': {
+            transform: 'translateX(-4px)',
+          },
+          '40%, 60%': {
+            transform: 'translateX(4px)',
+          },
         },
       },
     },

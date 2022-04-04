@@ -97,31 +97,16 @@ async function submit() {
 }
 </script>
 
-<style>
+<style lang="postcss" scoped>
 .shake-enter-active {
-  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97);
+  @apply animate-shake;
 }
 .shake-leave-active {
-  transition: opacity 0.5s ease;
+  @apply transition-opacity duration-150 ease-out;
 }
 
 .shake-enter-from,
 .shake-leave-to {
-  opacity: 0;
-}
-
-@keyframes shake {
-  10%, 90% {
-    transform: translateX(-1px);
-  }
-  20%, 80% {
-    transform: translateX(2px);
-  }
-  30%, 50%, 70% {
-    transform: translateX(-4px);
-  }
-  40%, 60% {
-    transform: translateX(4px);
-  }
+  @apply opacity-0;
 }
 </style>
