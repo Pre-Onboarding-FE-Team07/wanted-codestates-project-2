@@ -1,7 +1,7 @@
 import { Handler } from '@netlify/functions';
 import axiosInstance from '@/netlify/utils/axios';
-import axios from 'axios';
 import { API_URL } from '@/netlify/constants/api';
+import { protectHandler } from '@/netlify/utils/error-handler';
 
 type DataType = {
   accessId: string;
@@ -9,7 +9,7 @@ type DataType = {
   level: number;
 }
 
-export const handler: Handler = async (event) => {
+export const handler: Handler = protectHandler(async (event) => {
   const { username } = event.queryStringParameters || {};
 
   if (!username) {
@@ -19,29 +19,12 @@ export const handler: Handler = async (event) => {
     };
   }
 
-  try {
-    const { status, data } = await axiosInstance.get(API_URL.GET_USER_ID_BY_USERNAME(username));
-    const { accessId } = data as DataType;
+  const url = API_URL.GET_USER_ID_BY_USERNAME(username);
+  const { status, data } = await axiosInstance.get(url);
+  const { accessId } = data as DataType;
 
-    return {
-      statusCode: status,
-      body: JSON.stringify({ userId: accessId }),
-    };
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error(error.message);
-      const { code } = error;
-
-      return {
-        statusCode: Number(code) || 404,
-        body: JSON.stringify({ message: 'User not found' }),
-      };
-    }
-
-    console.error(error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ message: 'Internal Server Error' }),
-    };
-  }
-};
+  return {
+    statusCode: status,
+    body: JSON.stringify({ userId: accessId }),
+  };
+});
