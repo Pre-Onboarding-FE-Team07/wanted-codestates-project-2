@@ -2,26 +2,46 @@
   <div class="relative flex flex-col overflow-hidden bg-center bg-cover bg-flag-main place-items-center place-content-center h-[500px] sm:h-[655px] w-full xl:w-full -mt-14">
     <div class="absolute inset-0 bg-[#005fcc] opacity-30" />
     <div class="absolute inset-0 top-12 max-w-[1400px] mx-auto xl:block hidden sm:block">
-      <img
-        class="absolute left-[30px] w-[200px] top-[20px] xl:w-[380px] xl:top-[150px]"
-        src="@/assets/covid_left.png"
-        alt=""
+      <transition
+        name="ch-mv-r"
+        appear
       >
-      <img
-        class="absolute left-[30px] h-[160px] top-[20px] xl:h-[300px] xl:top-[150px]"
-        src="@/assets/main_left_bg.png"
-        alt=""
+        <img
+          class="absolute left-[30px] w-[200px] top-[20px] xl:w-[380px] xl:top-[150px]"
+          src="@/assets/covid_left.png"
+          alt=""
+        >
+      </transition>
+      <transition
+        name="bg-mv-r"
+        appear
       >
-      <img
-        class="absolute right-[30px] w-[200px] top-[420px] xl:w-[380px] xl:top-[150px]"
-        src="@/assets/covid_right.png"
-        alt=""
+        <img
+          class="absolute left-[30px] h-[160px] top-[20px] xl:h-[300px] xl:top-[150px]"
+          src="@/assets/main_left_bg.png"
+          alt=""
+        >
+      </transition>
+      <transition
+        name="ch-mv-l"
+        appear
       >
-      <img
-        class="absolute right-[30px] h-[160px] top-[420px] xl:h-[300px] xl:top-[150px]"
-        src="@/assets/main_right_bg.png"
-        alt=""
+        <img
+          class="absolute right-[30px] w-[200px] top-[420px] xl:w-[380px] xl:top-[150px]"
+          src="@/assets/covid_right.png"
+          alt=""
+        >
+      </transition>
+      <transition
+        name="bg-mv-l"
+        appear
       >
+        <img
+          class="absolute right-[30px] h-[160px] top-[420px] xl:h-[300px] xl:top-[150px]"
+          src="@/assets/main_right_bg.png"
+          alt=""
+        >
+      </transition>
     </div>
     <div class="relative flex flex-col items-center w-full px-10 text-white">
       <header class="text-center">
@@ -109,4 +129,34 @@ async function submit() {
 .shake-leave-to {
   @apply opacity-0;
 }
+
+.ch-mv-r-enter-from,
+.bg-mv-r-enter-from {
+  @apply -translate-x-full opacity-0;
+}
+
+.ch-mv-l-enter-from,
+.bg-mv-l-enter-from {
+  @apply translate-x-full opacity-0;
+}
+
+.ch-mv-r-enter-to,
+.bg-mv-r-enter-to,
+.ch-mv-l-enter-to,
+.bg-mv-l-enter-to {
+  @apply translate-x-0 opacity-100;
+}
+
+.ch-mv-r-enter-active,
+.bg-mv-r-enter-active,
+.ch-mv-l-enter-active,
+.bg-mv-l-enter-active {
+  @apply transition-all duration-500 ease-out;
+}
+
+.bg-mv-r-enter-active,
+.bg-mv-l-enter-active {
+  @apply delay-150;
+}
+
 </style>
