@@ -24,6 +24,17 @@ export default createStore<{
         return null;
       }
     },
+    async [ActionTypes.GET_USER_INFO](_, payload: Payload) {
+      const { userId, matchType } = payload.queries || {};
+      let url = `${API_URL}/get-user-info?userId=${userId}`;
+      if (matchType) url += `&matchType=${matchType}`;
+      try {
+        const { data } = await axios.get(url);
+        return data;
+      } catch (error) {
+        return null;
+      }
+    },
   },
   modules: {
   },
