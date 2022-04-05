@@ -3,6 +3,7 @@ declare namespace __WebpackModuleApi {
       env: {
         OPEN_API_KEY: string;
         BASE_URL: string;
+        NODE_ENV: 'production' | 'development';
       }
     }
   }
