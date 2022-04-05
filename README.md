@@ -129,6 +129,8 @@
   -  [`get-user-info`](netlify/functions/get-user-info.ts): 사용자의 정보 및 최근 전적 정보를 반환합니다. 승률, 완주율 그리고 리타이어율과 전적를 확인할 수 있으며, chart.js를 위한 데이터를 제공합니다.
   -  [`get-match-details`](netlify/functions/get-match-details.ts): 매치 아이디를 받아 해당 매치의 자세한 정보를 반환합니다. 순위 순서대로 나열된 배열을 응답합니다.
 
+- Functions의 엔드포인트인 `/.netlify/functions`는 사용하기에 지저분하여 [`public/_redirects`](public/_redirects) 파일을 통해 `/api`로 리다이렉트하도록 했습니다. DevTools의 Network 탭에서 확인해본 결과, `/.netlify/functions`에 접근하는 대신 `/api`에 접근하여 요청 가능하도록 변경되었습니다.
+
 - 다양한 [utils](netlify/utils) 함수를 구현했습니다.
 
   - [axios.ts](netlify/utils/axios.ts): axios 인스턴스를 생성합니다. headers에 API 키를 등록했습니다.
@@ -148,19 +150,25 @@
 
 또한, 브라우저에서 Open API에 요청할 때 DevTools의 Network 탭에서 해당 요청의 headers를 확인해보면 그대로 API 키가 노출되는 문제가 있었는데, 이를 proxy 서버가 대신 해주니 노출되지 않아 보안 면에서도 문제를 해결할 수 있었습니다. (Proxy 서버 API는 동일 출처에서만 호출 가능합니다.)
 
+- Netlify Redirects 문제
+
+Netlify functions 엔드포인트 리다이렉트를 위해 [`netlify.toml`](netlify.toml) 파일에서 설정을 해주었으나, 제대로 동작하지 않는 문제가 있었습니다. [공식 문서 확인 결과](https://docs.netlify.com/get-started/#redirect-a-path) `_redirects` 파일을 이용해야 했으며, 루트 폴더가 아닌 `public` 폴더 내에 위치시켜야만 동작했습니다.
+
+또한, 공식 문서에는 없지만 status를 200으로 설정해주지 않으면 304 리다이렉션과 함께 두 번 요청하는 문제가 있었습니다. status를 200으로 지정해주어 한 번만 요청할 수 있도록 문제를 수정했습니다.
+
 - Axios Error Handling
 
 `try...catch`에서 얻은 `error` 객체는 `any`이므로 AxiosError인지 먼저 확인해보아야 했습니다. 검색 결과 `axios.isAxiosError(error)`라는 [`TypeGuard`](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) 함수를 제공하고 있었고 이를 통해 AxiosError 타입인지 확인할 수 있었습니다.
 
 - [protectHandler](netlify/utils/error-handler.ts) 구현
 
-Netlify functions인 `handler`에서 axios를 사용하기 위해 매번 `try...catch`를 작성해야 했습니다. `AxiosError`와 `InternalServerError` 처리를 반복적으로 수행해야 했으므로 이를 하나로 통합하기 위해 [`protectHandler`](netlify/utils/error-handler.ts)를 구현했습니다.
+Netlify functions인 `handler`에서 axios를 사용하기 위해 매번 `try...catch`를 작성해야 했습니다. `AxiosError`와 `InternalServerError` 처리를 위해 반복적으로 작성해야 했으므로 이를 하나로 통합하기 위해 [`protectHandler`](netlify/utils/error-handler.ts)를 구현했습니다.
 
-`protectHandler`는 `handler`를 인자로 받아 그 내부에서 발생한 에러를 대신 잡아내고 분기하여 처리합니다. 덕분에 `handler`를 작성할 때마다 에러 처리에 고민할 필요 없이 `protectHandler`에서 에러를 일괄 처리해주므로 반복적인 작업을 줄이는 결과를 얻을 수 있었습니다. 에러 전달 과정을 나타내면 다음과 같습니다.
+`protectHandler`는 `handler`를 인자로 받아 그 내부에서 발생한 에러를 대신 잡아내고 분기하여 처리합니다. 덕분에 `handler`를 작성할 때마다 에러 처리에 고민할 필요 없이 `protectHandler`에서 에러를 일괄 처리해주므로 `handler`마다 `try...catch`를 작성해야 하는 반복적인 작업을 없앨 수 있었습니다. 에러 전달 과정을 나타내면 다음과 같습니다.
 
-   1. handler에서 에러 발생
-   2. protectHandler로 에러 전달
-   3. `try...catch`에 의해 처리되어 에러를 분류하고 그에 맞게 응답
+    1. handler에서 에러가 발생합니다.
+    2. try...catch가 없으므로 에러가 호출자인 protectHandler에게 전달됩니다.
+    3. protectHandler의 try...catch에 의해 잡은 에러를 분류하여 그에 맞는 결과를 반환합니다.
 
 - Ranking 페이지 데이터 제한 문제
 
