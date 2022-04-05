@@ -177,3 +177,7 @@ Rank 페이지가 필요로 하는 모든 데이터를 수집하기 위해선 �
 - CssMinimizerWebpackPlugin 문제
 
 빌드 시 Vue에 기본으로 포함되어 있는 CssMinimizerWebpackPlugin가 최적화하는 과정에서 알 수 없는 에러가 발생했습니다. 원인을 파악해보려고 했으나 찾지 못하여 [webpack 설정에서 비활성화](vue.config.js#L15)하고 이를 대신할 수 있는 [PostCSS 플러그인인 cssnano 라이브러리](postcss.config.js#L7)을 적용하여 최적화했습니다.
+
+- Chart.js 번들 사이즈 문제
+
+Chart.js의 경우 그 자체로 번들 사이즈가 꽤 크다는 문제가 있었습니다. Tree-shaking을 지원하여 번들링 사이즈를 줄이고 있지만, 조금 더 줄이고자 [Dynamic Import를 이용해 Code splitting을 적용했습니다.](src/App.vue#L9) 사전에 Chart 관련 코드를 미리 로드해두고 이후 컴포넌트에서 이용만 하면 되므로 번들 사이즈를 줄이고 성능을 향상시킬 수 있었습니다.
