@@ -1,42 +1,37 @@
 <template>
-  <div class="relative flex flex-col overflow-hidden bg-center bg-cover bg-flag-main place-items-center place-content-center h-[500px] sm:h-[655px] w-full xl:w-full -mt-14">
+  <div
+    class="relative flex flex-col overflow-hidden bg-center bg-cover bg-flag-main place-items-center place-content-center h-[500px] sm:h-[655px] w-full xl:w-full -mt-14 opacity-0 transition-opacity"
+    :class="{ 'opacity-100' : bgLoaded }"
+  >
     <div class="absolute inset-0 bg-[#005fcc] opacity-30" />
     <div class="absolute inset-0 top-12 max-w-[1400px] mx-auto xl:block hidden sm:block">
-      <transition
-        name="ch-mv-r"
-        appear
-      >
+      <transition name="ch-mv-r">
         <img
+          v-show="bgLoaded"
           class="absolute left-[30px] w-[200px] top-[20px] xl:w-[380px] xl:top-[150px]"
           src="@/assets/covid_left.png"
           alt=""
         >
       </transition>
-      <transition
-        name="bg-mv-r"
-        appear
-      >
+      <transition name="bg-mv-r">
         <img
+          v-show="bgLoaded"
           class="absolute left-[30px] h-[160px] top-[20px] xl:h-[300px] xl:top-[150px]"
           src="@/assets/main_left_bg.png"
           alt=""
         >
       </transition>
-      <transition
-        name="ch-mv-l"
-        appear
-      >
+      <transition name="ch-mv-l">
         <img
+          v-show="bgLoaded"
           class="absolute right-[30px] w-[200px] top-[420px] xl:w-[380px] xl:top-[150px]"
           src="@/assets/covid_right.png"
           alt=""
         >
       </transition>
-      <transition
-        name="bg-mv-l"
-        appear
-      >
+      <transition name="bg-mv-l">
         <img
+          v-show="bgLoaded"
           class="absolute right-[30px] h-[160px] top-[420px] xl:h-[300px] xl:top-[150px]"
           src="@/assets/main_right_bg.png"
           alt=""
@@ -44,11 +39,11 @@
       </transition>
     </div>
     <div class="relative flex flex-col items-center w-full px-10 text-white">
-      <transition
-        name="header"
-        appear
-      >
-        <header class="text-center">
+      <transition name="header">
+        <header
+          v-show="bgLoaded"
+          class="text-center"
+        >
           <span class="text-[28px] leading-4">넥슨 오픈 API 기반</span>
           <h1 class="my-1 text-[40px] leading-10 break-words whitespace-nowrap">
             카트라이더 <b>전적</b> 검색
@@ -56,11 +51,9 @@
           <small class="block my-2 mx-auto px-16 rounded-full w-fit text-lg tracking-widest bg-[rgba(0,0,0,0.3)]">사회적거리두기</small>
         </header>
       </transition>
-      <transition
-        name="form"
-        appear
-      >
+      <transition name="form">
         <form
+          v-show="bgLoaded"
           class="relative flex justify-between gap-2 w-full px-6 border-4 border-white rounded-full max-w-[600px] min-w-[90px] mt-16"
           @submit.prevent="submit"
         >
@@ -98,17 +91,19 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { Payload } from '@/types/vuex';
 import { ActionTypes } from '@/store/types';
+import BgImage from '@/assets/main_bg1.png';
 
 const nickname = ref('');
 const lastQuery = ref('');
 const router = useRouter();
 const store = useStore();
 
+const bgLoaded = ref(false);
 const notFoundUser = ref(false);
 
 let timeoutId = -1;
@@ -129,6 +124,14 @@ async function submit() {
     router.push(`/user/${lastQuery.value}`);
   }
 }
+
+onMounted(() => {
+  const img = new Image();
+  img.src = BgImage;
+  img.addEventListener('load', () => {
+    bgLoaded.value = true;
+  });
+});
 </script>
 
 <style lang="postcss" scoped>
