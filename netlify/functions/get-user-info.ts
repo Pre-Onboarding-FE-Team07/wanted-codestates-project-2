@@ -7,7 +7,6 @@ import { protectHandler } from '@/netlify/utils/error-handler';
 import { getKartByHash, getTrackByHash } from '@/netlify/utils/resource';
 import { getLapTime, getTimeDiff } from '@/netlify/utils/time';
 import { Handler } from '@netlify/functions';
-import { AxiosResponse } from 'axios';
 
 type Query = {
   userId?: string;
@@ -28,7 +27,7 @@ export const handler: Handler = protectHandler(async (event) => {
     match_types: MatchType.SPEED_INDI_COMB,
   });
 
-  const { status, data }: AxiosResponse<MatchResponseDTO> = await axiosInstance.get(url);
+  const { status, data } = await axiosInstance.get<MatchResponseDTO>(url);
 
   const { matches: [{ matches }], nickName } = data;
 

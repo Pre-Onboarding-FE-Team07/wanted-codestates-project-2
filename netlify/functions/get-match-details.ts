@@ -5,7 +5,6 @@ import { protectHandler } from '@/netlify/utils/error-handler';
 import { getKartByHash } from '@/netlify/utils/resource';
 import { getLapTime } from '@/netlify/utils/time';
 import { Handler } from '@netlify/functions';
-import { AxiosResponse } from 'axios';
 
 type Query = {
   matchId?: string;
@@ -23,7 +22,7 @@ export const handler: Handler = protectHandler(async (event) => {
 
   const url = API_URL.GET_MATCH_INFO_BY_MATCH_ID(matchId);
 
-  const { status, data }: AxiosResponse<MatchDetailsDTO> = await axiosInstance.get(url);
+  const { status, data } = await axiosInstance.get<MatchDetailsDTO>(url);
 
   const matchDetailInfo: MatchDetailInfo[] = [];
 

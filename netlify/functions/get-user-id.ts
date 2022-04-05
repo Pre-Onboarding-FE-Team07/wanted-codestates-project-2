@@ -3,12 +3,6 @@ import axiosInstance from '@/netlify/utils/axios';
 import { API_URL } from '@/netlify/constants/api';
 import { protectHandler } from '@/netlify/utils/error-handler';
 
-type DataType = {
-  accessId: string;
-  name: string;
-  level: number;
-}
-
 export const handler: Handler = protectHandler(async (event) => {
   const { username } = event.queryStringParameters || {};
 
@@ -20,8 +14,8 @@ export const handler: Handler = protectHandler(async (event) => {
   }
 
   const url = API_URL.GET_USER_ID_BY_USERNAME(username);
-  const { status, data } = await axiosInstance.get(url);
-  const { accessId } = data as DataType;
+  const { status, data } = await axiosInstance.get<{ accessId: string }>(url);
+  const { accessId } = data;
 
   return {
     statusCode: status,
