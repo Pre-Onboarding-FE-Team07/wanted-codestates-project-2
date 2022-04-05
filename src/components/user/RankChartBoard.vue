@@ -21,9 +21,8 @@
 <script lang="ts" setup>
 import BoardContainer from '@/components/user/BoardContainer.vue';
 import { colors } from '@/styles/theme';
-import {
-  Chart, ChartData, ChartOptions, registerables,
-} from 'chart.js';
+import Chart from 'chart.js/auto';
+import { ChartData, ChartOptions } from 'chart.js';
 import { onMounted, ref } from 'vue';
 
 export type RankType = {
@@ -38,8 +37,6 @@ export type RankType = {
     rankRate: number;
   }
 };
-
-Chart.register(...registerables);
 
 const canvasRef = ref();
 

@@ -25,7 +25,8 @@
 import BoardContainer from '@/components/user/BoardContainer.vue';
 import RecordTable from '@/components/user/RecordTable.vue';
 import { colors } from '@/styles/theme';
-import { Chart, ChartData, ChartOptions } from 'chart.js';
+import Chart from 'chart.js/auto';
+import { ChartData, ChartOptions } from 'chart.js';
 import { onMounted, ref } from 'vue';
 import { lighten } from 'polished';
 
