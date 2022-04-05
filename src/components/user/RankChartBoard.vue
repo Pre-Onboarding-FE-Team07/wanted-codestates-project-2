@@ -21,8 +21,7 @@
 <script lang="ts" setup>
 import BoardContainer from '@/components/user/BoardContainer.vue';
 import { colors } from '@/styles/theme';
-import Chart from 'chart.js/auto';
-import { ChartData, ChartOptions } from 'chart.js';
+import { Chart, ChartData, ChartOptions } from 'chart.js';
 import { onMounted, ref } from 'vue';
 
 export type RankType = {
