@@ -173,3 +173,7 @@ Netlify functions인 `handler`에서 axios를 사용하기 위해 매번 `try...
 - Ranking 페이지 데이터 제한 문제
 
 Rank 페이지가 필요로 하는 모든 데이터를 수집하기 위해선 굉장히 많은 수의 API 요청이 필요했습니다. 하지만, 주어진 API로 그 많은 요청을 수행하면 `Too many request` 에러가 발생하므로 진행하지 못하였습니다. 대신, 요구조건에 가장 부합하는 애니메이션과 반응형 디자인에 주력했습니다.
+
+- CssMinimizerWebpackPlugin 문제
+
+빌드 시 Vue에 기본으로 포함되어 있는 CssMinimizerWebpackPlugin가 최적화하는 과정에서 알 수 없는 에러가 발생했습니다. 원인을 파악해보려고 했으나 찾지 못하여 [webpack 설정에서 비활성화](vue.config.js#L15)하고 이를 대신할 수 있는 [PostCSS 플러그인인 cssnano 라이브러리](postcss.config.js#L7)을 적용하여 최적화했습니다.
