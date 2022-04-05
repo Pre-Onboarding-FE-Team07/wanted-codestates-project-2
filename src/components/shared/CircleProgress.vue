@@ -24,18 +24,19 @@
         stroke="#ddd"
         :stroke-width="stroke"
       />
-      <circle
-        id="circle-progress"
-        :cx="radius"
-        :cy="radius"
-        :r="radius - stroke"
-        fill="transparent"
-        :stroke="color"
-        :stroke-width="stroke"
-        class="origin-center -rotate-90"
-        :stroke-dasharray="circumference"
-        :stroke-dashoffset="progress"
-      />
+      <transition appear>
+        <circle
+          :cx="radius"
+          :cy="radius"
+          :r="radius - stroke"
+          fill="transparent"
+          :stroke="color"
+          :stroke-width="stroke"
+          class="origin-center -rotate-90"
+          :stroke-dasharray="circumference"
+          :stroke-dashoffset="progress"
+        />
+      </transition>
       <text
         :x="radius"
         :y="radius"
@@ -76,18 +77,17 @@ const circumference = 2 * Math.PI * (props.radius - props.stroke);
 const progress = circumference * (1 - (props.value / 100));
 </script>
 
-<style scoped>
-#circle-progress {
-  animation: circle 1s ease;
+<style lang="postcss" scoped>
+.v-enter-active,
+.v-leave-active {
+  @apply transition-all duration-1000 ease-in-out;
 }
 
-@keyframes circle {
-  from {
-    stroke-dashoffset: v-bind(circumference) ;
-  }
-  to {
-    stroke-dashoffset: v-bind(progress)
-  }
+.v-enter-from {
+  stroke-dashoffset: v-bind(circumference);
 }
 
+.v-enter-to {
+  stroke-dashoffset: v-bind(progress);
+}
 </style>
