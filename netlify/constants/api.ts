@@ -7,7 +7,7 @@ export const API_URL = {
   GET_USER_ID_BY_USERNAME: (username: string) => encodeURI(`/users/nickname/${username}`),
   GET_USERNAME_BY_USER_ID: (userId: string) => `/users/${userId}`,
   GET_MATCH_LIST_BY_USER_ID: (userId: string, queries?: QueryParameters) => `/users/${userId}/matches${formatQueries(queries)}`,
-  GET_ALL_MATCH_LIST: (queries?: QueryParameters) => `/matches${formatQueries(queries)}`,
+  GET_ALL_MATCH_LIST: (queries?: QueryParameters) => `/matches/all${formatQueries(queries)}`,
   GET_MATCH_INFO_BY_MATCH_ID: (matchId: string) => `/matches/${matchId}`,
 } as const;
 
