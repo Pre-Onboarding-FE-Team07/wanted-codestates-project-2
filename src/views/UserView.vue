@@ -9,7 +9,7 @@
   >
     <user-info
       :avatar="data.avatarUrl"
-      :username="(route.params.nickname as string)"
+      :username="(route.params.username as string)"
     />
     <div class="w-full max-w-[1300px] pb-2 flex flex-row gap-2 h-[260px] overflow-x-auto overflow-hidden">
       <total-score-board
@@ -61,7 +61,7 @@ import VisualRecordBoard from '@/components/user/VisualRecordBoard.vue';
 import RecordColumn from '@/components/user/RecordColumn.vue';
 import LoadingIndicator from '@/components/shared/LoadingIndicator.vue';
 import { useStore } from 'vuex';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { onMounted, ref } from 'vue';
 import { ActionTypes } from '@/store/types';
 import { Payload } from '@/types/vuex';
@@ -69,6 +69,7 @@ import { MatchRecord, RankChartData, RankInfo } from '@/netlify/types/api';
 
 const store = useStore();
 const route = useRoute();
+const router = useRouter();
 
 const initLoaded = ref(false);
 
@@ -108,8 +109,11 @@ const data = ref<{
 });
 
 onMounted(async () => {
+  const { username } = route.params;
+  if (!username) router.replace('/');
+
   const { userId } = await store.dispatch(ActionTypes.GET_USER_ID, {
-    queries: { username: route.params.nickname },
+    queries: { username },
   } as Payload) || {};
 
   const response = await store.dispatch(ActionTypes.GET_USER_INFO, {
