@@ -5,7 +5,6 @@ import { Kart, Track } from '@/netlify/types/api';
 
 export function getKartByHash(hash: string): Kart {
   const kart = kartInfo.data.find((k) => k.hash === hash);
-
   return {
     hash: kart?.hash || '',
     name: kart?.KartName || '',

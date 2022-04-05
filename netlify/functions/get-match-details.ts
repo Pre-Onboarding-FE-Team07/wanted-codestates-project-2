@@ -2,7 +2,7 @@ import { API_URL } from '@/netlify/constants/api';
 import { MatchDetailInfo, MatchDetailsDTO } from '@/netlify/types/api';
 import axiosInstance from '@/netlify/utils/axios';
 import { protectHandler } from '@/netlify/utils/error-handler';
-import { getKartByHash } from '@/netlify/utils/rosource';
+import { getKartByHash } from '@/netlify/utils/resource';
 import { getLapTime } from '@/netlify/utils/time';
 import { Handler } from '@netlify/functions';
 import { AxiosResponse } from 'axios';

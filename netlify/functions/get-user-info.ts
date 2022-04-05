@@ -4,7 +4,7 @@ import {
 } from '@/netlify/types/api';
 import axiosInstance from '@/netlify/utils/axios';
 import { protectHandler } from '@/netlify/utils/error-handler';
-import { getKartByHash, getTrackByHash } from '@/netlify/utils/rosource';
+import { getKartByHash, getTrackByHash } from '@/netlify/utils/resource';
 import { getLapTime, getTimeDiff } from '@/netlify/utils/time';
 import { Handler } from '@netlify/functions';
 import { AxiosResponse } from 'axios';
